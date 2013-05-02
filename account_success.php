@@ -1,3 +1,11 @@
+<?php
+  $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
+    or die('Error connecting to MySQL server.');
+   
+   mysql_select_db("mikey_w", $dbc);
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -11,21 +19,27 @@
   $first_name = $_POST['firstname'];
   $last_name = $_POST['lastname'];
   $address_1 = $_POST['addr1'];
+    boolean house_no=0;
+
   $address_2 = $_POST['addr2'];
   $city = $_POST['city'];
   $state = $_POST['state'];
   $zip = $_POST['zip'];
+    boolean five_numbers=0;
+    boolean zip_noletters=0;
+
   $phone = $_POST['phone'];
   $phone = str_replace("-", "", $phone);
   $phone = str_replace("(", "", $phone);
   $phone = str_replace(")", "", $phone);
   $phone = str_replace(" ", "", $phone);
-  $email = $_POST['email'];
+    boolean ten_numbers=0;
+    boolean phone_noletters=0;
 
-  $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
-    or die('Error connecting to MySQL server.');
-   
-   mysql_select_db("mikey_w", $dbc);
+  $email = $_POST['email1'];
+  $email = $email . $_POST['email2'];
+  $email = $email . $_POST['email3'];
+
 
    $student_NO = randomGWID();
    $password = get_rand_numbers(8);
