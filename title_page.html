@@ -1,0 +1,27 @@
+<html>
+   <head>
+      <title>HTML Online Editor Sample</title>
+   </head>
+   <body>
+      <h1 style="text-align: center;"> University Registration System</h1>
+      <hr />
+         <p style="text-align: center;">
+            
+               <!-- This is a new form that goes to the purchase_items view when the button is pressed. -->
+               <form action="index.php?view=universal_login" method="post">
+                  <p style="text-align:center"><input type="submit" name="login" value="Login" /></p>
+               </form>
+
+               
+               <form action="reset.php" method="POST">
+                  <p style="text-align:center">
+                     <input type="submit" name="reset" value="RESET - DO NOT PRESS (unless you know what you're doing...)" />
+                  </p> 
+               </form>
+         </p>
+
+      <!-- Include the controller and all of the views -->
+      <?php include "views/".$controller."/".$view.".php"; ?>
+         
+      </body>
+</html>

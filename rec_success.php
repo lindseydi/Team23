@@ -36,11 +36,11 @@
 
 
   $result = mysql_query($query)
-    or die('Error querying database.');
+    or die(mysql_error().' Error querying database for first result.');
   $result3 = mysql_query($query3)
-    or die('Error querying database.');
+    or die(mysql_error().' Error querying database for second result.');
   $result4 = mysql_query($query3)
-    or die('Error querying database.');
+    or die(mysql_error().' Error querying database for third result.');
 
   mysql_close($dbc);
 
