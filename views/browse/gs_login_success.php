@@ -37,7 +37,7 @@ if($_SESSION['gs_auth'] == false){
     </br>
 
 
-  <form name="search" method="post" action="gs_search_results.php">
+  <form name="search" method="post" action="index.php?view=gs_search_results">
 
   <!--<label for="search_term">Search:</label>-->
   <input type="text" name="search_term" />

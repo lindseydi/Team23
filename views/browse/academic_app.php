@@ -18,17 +18,24 @@
   <p>Fill out the following form as completely as possible:</p>
   <?php
 
-  $student_no = $_GET['student_no'];
+  $student_no = $_SESSION['student_NO'];//$_GET['student_no'];
+
+  //testing purposes
+  //mysql_query("RAWR") or die('academic_app page: '.$student_no);
+
   $query = "SELECT * FROM application WHERE studentNO='$student_no';";
   $data = mysql_query($query)
     or die('Error querying database.'  . mysql_error());
   echo "<br/>";
 
+  $_SESSION['fname'] = $fname;
+  $_SESSION['lname'] = $lname;
+
   list($studentNO,$fname,$lname,$transcript_recv,$starting_sem,$prior_degree,$pr_school,$pr_GPA,$pr_year,$prior_degree2,$pr_school2,$pr_GPA2,$pr_year2,
   $GRE_analytical,$GRE_quant,$GRE_verbal,$GRE_subj1,$GRE_subj2,$prior_work1,$prior_work2,$interest,$rec_email,$rec_full_name,$date_submitted, $letter_recv) = mysql_fetch_row($data);
 
   ?>
-  <form method="post" action="academic_app_success.php">
+  <form method="post" action="index.php?view=academic_app_success">
     <label for="studentNO">Student Number:</label>
     <?php
     echo "<input type=\"text\" id=\"studentNO\" name=\"studentNO\" value=\"$student_no\" required><br />";

@@ -33,6 +33,6 @@ Your decision has been recorded.
   echo "Thank you for submitting your review!";
   echo "<br/>";
   echo "<br/>";  
-  echo "<a href=\"fcommittee_login_success.php?email=$email\">Back to welcome screen.</a><br />";
+  echo "<a href=\"index.php?view=fcommittee_login_success\">Back to welcome screen.</a><br />";
 
 ?>

@@ -10,7 +10,7 @@
   <h2>Create and account for you Application.</h2>
 
   <p>Please fill out all of the information before hitting submit.</p>
-  <form method="post" action="account_success.php">
+  <form method="post" action="index.php?view=account_success">
     <label for="firstname">First name:</label>
     <input type="text" name="firstname"  maxlength="20" required><br />
     <label for="lastname">Last name:</label>
