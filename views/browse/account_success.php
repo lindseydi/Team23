@@ -19,22 +19,22 @@
   $first_name = $_POST['firstname'];
   $last_name = $_POST['lastname'];
   $address_1 = $_POST['addr1'];
-    boolean house_no=0;
+    boolean $house_no=0;
 
   $address_2 = $_POST['addr2'];
   $city = $_POST['city'];
   $state = $_POST['state'];
   $zip = $_POST['zip'];
-    boolean five_numbers=0;
-    boolean zip_noletters=0;
+    boolean $five_numbers=0;
+    boolean $zip_noletters=0;
 
   $phone = $_POST['phone'];
   $phone = str_replace("-", "", $phone);
   $phone = str_replace("(", "", $phone);
   $phone = str_replace(")", "", $phone);
   $phone = str_replace(" ", "", $phone);
-    boolean ten_numbers=0;
-    boolean phone_noletters=0;
+    boolean $ten_numbers=0;
+    boolean $phone_noletters=0;
 
   $email = $_POST['email1'];
   $email = $email . $_POST['email2'];
