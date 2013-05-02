@@ -37,15 +37,14 @@ if($_SESSION['gs_auth'] == false){
 	$query = "SELECT courses.cid, transcripts.sid, faculty.fid, transcripts.grades, students.sname, faculty.fname, courses.ctitle
 	          FROM courses, faculty, transcripts, students 
 	          WHERE courses.cid = faculty.cid AND transcripts.cid = courses.cid AND transcripts.sid = students.sid";
- 	$result = mysql_query($query)
-   	or die('Query Error');
-   $i = 1;
-   $num_rows = mysql_num_rows($result);
+ 	$result = mysql_query($query) or die('Query Error');
+   	$i = 1;
+   	$num_rows = mysql_num_rows($result);
 
 	while ($row = mysql_fetch_assoc($result)) { ?> 
-	   <input type="hidden" name="<?php echo course.$i; ?>" value="<?php echo $row['cid']; ?>" >
-	   <input type="hidden" name="<?php echo student.$i; ?>" value="<?php echo $row['sid']; ?>" >
-      <input type="hidden" name="index" value="<?php echo $num_rows; ?>"> 	
+	   	<input type="hidden" name="<?php echo course.$i; ?>" value="<?php echo $row['cid']; ?>" >
+	   	<input type="hidden" name="<?php echo student.$i; ?>" value="<?php echo $row['sid']; ?>" >
+      	<input type="hidden" name="index" value="<?php echo $num_rows; ?>"> 	
 		<tr>
 		   <td><?php echo $row['cid'];      ?></td>
 		   <td><?php echo $row['ctitle'];   ?></td>

@@ -160,17 +160,17 @@
          if($num_results > 0) {
             $_SESSION['reg_error']['error'] = true;
             $_SESSION['reg_error']['code'] = 2;
-            header('Location: index.php?view=add_drop');
+            header('Location: index.php?view=register_course');
          } 
          else if ($error == 1) {
             $_SESSION['reg_error']['error'] = true;
             $_SESSION['reg_error']['code'] = 1;
-            header('Location: index.php?view=add_drop');
+            header('Location: index.php?view=register_course');
          } 
          else if ($error == 2) {
             $_SESSION['reg_error']['error'] = true;
             $_SESSION['reg_error']['code'] = 3;
-            header('Location: index.php?view=add_drop');
+            header('Location: index.php?view=register_course');
          } else {
    
             $query5 = "INSERT INTO transcripts VALUES ('$student', '$cid', '$cname', '$credit', 'IP', '$cday', '$ctime')";
@@ -178,7 +178,7 @@
    
             mysql_close($dbc);
          
-            header('Location: index.php?view=add_drop');
+            header('Location: index.php?view=register_course');
          }
       
       break;
