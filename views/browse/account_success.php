@@ -6,7 +6,7 @@
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML TRUE.FALSE Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -19,22 +19,29 @@
   $first_name = $_POST['firstname'];
   $last_name = $_POST['lastname'];
   $address_1 = $_POST['addr1'];
-    boolean $house_no=0;
-
+    $house_no=FALSE;
+    if(startNum($address_1)){$house_no=TRUE;}
   $address_2 = $_POST['addr2'];
   $city = $_POST['city'];
   $state = $_POST['state'];
   $zip = $_POST['zip'];
-    boolean $five_numbers=0;
-    boolean $zip_noletters=0;
+
+      $five_numbers=FALSE;
+      if(lengthOf($zip, 5)){
+        $five_numbers=TRUE;
+      }
+      $zip_noletters=FALSE;
+      if(noLetters($zip)){$zip_noletters=TRUE;}
 
   $phone = $_POST['phone'];
   $phone = str_replace("-", "", $phone);
   $phone = str_replace("(", "", $phone);
   $phone = str_replace(")", "", $phone);
   $phone = str_replace(" ", "", $phone);
-    boolean $ten_numbers=0;
-    boolean $phone_noletters=0;
+      $ten_numbers=FALSE;
+    if(lengthOf($phone, 10)){$ten_numbers=TRUE;}
+      $phone_noletters=FALSE;
+    if(noLetters($phone)){$phone_noletters=TRUE;}
 
   $email = $_POST['email1'];
   $email = $email . $_POST['email2'];
@@ -43,7 +50,7 @@
 
    $student_NO = randomGWID();
    $password = get_rand_numbers(8);
-   $appstatus = 1;
+   $appstatus = '1';
 
    //(1) Application incomplete
    //(2) Waiting on transcript and rec letter
@@ -54,18 +61,21 @@
 
    $student_status = 0;
    //(0) applicant
-   //(2) admit without aid, 
-   //(1)reject  
+   //(1)reject
+   //(2) admit without aid,   
    //(3) admit with aid
    //(4) student?
-
-
+   if($house_no){
+     if($five_numbers){
+        if($zip_noletters){
+          if($ten_numbers){
+            if($phone_noletters){
 
   $query ="INSERT INTO applicant VALUES ('$student_NO', '$password', '$first_name', '$last_name', '$email', '$address_1', '$address_2', '$city', '$state', '$zip', '$phone', '$appstatus', '$student_status');";
 
   $query2 = "INSERT INTO processes (studentNO) VALUES ('$student_NO');";
 
-  $query3 = "INSERT INTO application (studentNO, fname, lname, transcript_recv, letter_recv) VALUES ('$student_NO', '$first_name', '$last_name', '0', '0');";
+  $query3 = "INSERT INTO application (studentNO, fname, lname, transcript_recv, letter_recv) VALUES ('$student_NO', '$first_name', '$last_name', 'FALSE', 'FALSE');";
 
   $result = mysql_query($query)
     or die('Error querying database.'  . mysql_error());
@@ -83,10 +93,31 @@
   echo 'Your student number: ' . $student_NO;
   echo '<br />';
   echo 'Your password: ' . $password;
-   echo '<br />';
+  echo '<br />';
+  echo "<a href=\"applicant_login.html\">Login to fill out Application</a><br />";
+
+            }else{
+              echo "Your phone number contains a letter. Please fix this error.";
+              goBack();
+            }
+          }else{
+            echo "Your phone number is too short!";
+             goBack();
+          }
+        }else{
+          echo "Your zip code contains letters!";
+           goBack();
+        }
+      }else{
+          echo "Zip code is not the correct length.";
+           goBack();
+      }
+    }else{
+      echo "Please include your house number in your adddress.";
+      goBack();
+    }
 ?>
 
-<a href="applicant_login.html">Login to fill out Application</a><br />
 </body>
 </html>
 
@@ -127,11 +158,46 @@ function get_rand_numbers($length) {
         $rand_id="";
         for($i=1; $i<=$length; $i++) {
            // mt_srand((double)microtime() * 1000000);
-            $num = mt_rand(0,9);
+            $num = mt_rand(FALSE,9);
             $rand_id .= assign_rand_value($num);
         }
     }
     return $rand_id;
 }
 
+function startNum($string){
+    return strlen($string) > 0 && ctype_digit(substr($string, 0, 1));
+}
+
+function noLetters($string){
+    if (preg_match('/^[0-9]+$/', $string)) {
+        //echo "I am only numbers";
+        //echo "  " . $string;
+        return True;
+    } else {
+      //echo "I include letters!";
+      //echo "<br/><br/>";
+      //echo $string;
+      return False;
+    }
+}
+function lengthOf($string, $targetLen){
+  if(strlen($string)==$targetLen){
+    //echo strlen($string);
+    //echo 'The string $string was length $targetLen!';
+    //echo "<br/>";
+    return True;
+  }else{
+    //echo "oops! not long enough of a string!";
+    return False;
+  }
+}
+function goBack(){
+  echo "<br/><br/>";
+  echo "<FORM>";
+  echo "<INPUT class=\"center\" Type=\"button\" VALUE=\"Go back\" onClick=\"history.go(-1);return true;\">";
+  echo "</FORM>";
+  echo "<br/><br/>";
+}
 ?>
+
