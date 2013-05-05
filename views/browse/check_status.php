@@ -16,16 +16,19 @@
 
     mysql_select_db("mikey_w", $dbc);
 
-	$student_no= $_GET['student_no']; //Get the student number to pull all their info
-	//input it into the session so that it can carry over to the next page
-
+  //input it into the session so that it can carry over to the next page
+  $student_no = $_SESSION['student_NO'];
+	//$student_no= $_GET['student_no']; //Get the student number to pull all their info
+  
 	//create query to show application information
-	$query = "SELECT student_status, app_status FROM applicant WHERE studentNO=$student_no;";
+	$query = "SELECT student_status, app_status FROM applicant WHERE studentNO='$student_no';";
 	$data = mysql_query($query);
 	//echo mysql_fetch_row($data);
 
 	//should only iterate once
    list($student_status, $app_status) = mysql_fetch_row($data);
+
+   //echo "app status: " . $app_status . "<br/>";
 
    echo "<b>In terms of your application: </b>";
    switch($app_status){
@@ -56,19 +59,37 @@
 		   	break;
 		   	case '2':
 		   		echo "       Congratulations! You have been admitted!";
+          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO='$student_no'\">";
+          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Accept Offer<br>";
+          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Defer Offer<br>";
+          echo "<input type=\"submit\" value=\"Submit decision\">";
+          echo "</form>";
 		   	break;
 		   	case '3':
-		   		echo "       Congratulations! You have been admitted with Aid!";
-		   	break;
+		   		echo "Congratulations! You have been admitted with Aid!";
+          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO='$student_no'\">";
+          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Accept Offer<br>";
+          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Defer Offer<br>";
+          echo "<input type=\"submit\" value=\"Submit decision\">";
+          echo "</form>";
+        break;
 		   	case '4':
-		   		echo "       You have accepted the offer and are now a student.";
+		   		echo "       You have already chosen to defer your offer to GW's graduate program.";
+          echo " Good luck in your graduate studies.";
 		   	break;
+        case '5':
+          echo "       You have already chosen to accept your offer to GW's graduate program!";
+           echo " We cannot wait to have you as a student. Please allow a few days for your student account to be created and then check back to this page. Thank you for your patience!";
+        break;
+        case '6':
+          echo "       Your account has been created. Please login at this site:<br/>";
+        break;
 		   }
    	break;
    }
    	echo "<br/>";
    	echo "<br/>";
-    echo "<a href=\"welcome.php?student_NO=$student_no\">Back to welcome screen.</a><br />";
+    echo "<a href=\"index.php?view=welcome\">Back to welcome screen.</a><br />";
 ?>
 
 </body>

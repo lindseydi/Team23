@@ -43,15 +43,12 @@
       $phone_noletters=FALSE;
     if(noLetters($phone)){$phone_noletters=TRUE;}
 
-  $email = $_POST['email1'];
-  $email = $email . $_POST['email2'];
-  $email = $email . $_POST['email3'];
-
-
-   $student_NO = randomGWID();
-   $password = get_rand_numbers(8);
-   $appstatus = '1';
-
+  $email = $_POST['email'];
+    $email_valid=FALSE;
+    if(checkEmail($email)) {$email_valid=TRUE;}
+  $student_NO = randomGWID();
+  $password = get_rand_numbers(8);
+  $appstatus = '1';
    //(1) Application incomplete
    //(2) Waiting on transcript and rec letter
    //(3) Waiting on rec letter
@@ -64,18 +61,21 @@
    //(1)reject
    //(2) admit without aid,   
    //(3) admit with aid
-   //(4) student?
+   //(4) defer
+   //(5) accept
+   //(6) matriculate
+
    if($house_no){
      if($five_numbers){
         if($zip_noletters){
           if($ten_numbers){
             if($phone_noletters){
-
+               if($email_valid){
   $query ="INSERT INTO applicant VALUES ('$student_NO', '$password', '$first_name', '$last_name', '$email', '$address_1', '$address_2', '$city', '$state', '$zip', '$phone', '$appstatus', '$student_status');";
 
   $query2 = "INSERT INTO processes (studentNO) VALUES ('$student_NO');";
 
-  $query3 = "INSERT INTO application (studentNO, fname, lname, transcript_recv, letter_recv) VALUES ('$student_NO', '$first_name', '$last_name', 'FALSE', 'FALSE');";
+  $query3 = "INSERT INTO application (studentNO, fname, lname, transcript_recv, letter_recv) VALUES ('$student_NO', '$first_name', '$last_name', '0', '0');";
 
   $result = mysql_query($query)
     or die('Error querying database.'  . mysql_error());
@@ -88,6 +88,7 @@
 
   mysql_close($dbc);
 
+
   echo 'Thanks for creating an account.<br />';
   echo 'Please write this information down:.<br />';
   echo 'Your student number: ' . $student_NO;
@@ -95,7 +96,10 @@
   echo 'Your password: ' . $password;
   echo '<br />';
   echo "<a href=\"applicant_login.html\">Login to fill out Application</a><br />";
-
+              }else{
+                 echo "Your email address is invalid, please be sure it is of this format applicant@domain.ext ";
+                 goBack();                
+               }
             }else{
               echo "Your phone number contains a letter. Please fix this error.";
               goBack();
@@ -117,18 +121,14 @@
       goBack();
     }
 ?>
-
 </body>
 </html>
 
 <?php
 //Function that returns a random string of 8 numbers
 function randomGWID(){
-
     $randNum = get_rand_numbers(8);
-
-    $sql = sprintf("SELECT * FROM applicant WHERE studentNO = %d", $randNum); 
-   
+    $sql = sprintf("SELECT * FROM applicant WHERE studentNO = %d", $randNum);
     if(mysql_num_rows(mysql_query($sql)) > 0){
       randomGWID();
     }else{
@@ -181,6 +181,7 @@ function noLetters($string){
       return False;
     }
 }
+
 function lengthOf($string, $targetLen){
   if(strlen($string)==$targetLen){
     //echo strlen($string);
@@ -192,6 +193,16 @@ function lengthOf($string, $targetLen){
     return False;
   }
 }
+
+function checkEmail($email) {
+//regex from devshed
+  if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+).([a-zA-Z]+)+$/", $email)){
+    return TRUE;
+  } else{
+    return FALSE;
+  }
+}
+
 function goBack(){
   echo "<br/><br/>";
   echo "<FORM>";

@@ -289,6 +289,9 @@
 
          // Mysql_num_row is counting table row
          $count=mysql_num_rows($result);
+         list($studentNO, $password, $fname, $lname) = mysql_fetch_row($result);
+         $_SESSION['fname'] = $fname;
+         $_SESSION['lname'] = $lname;
 
          // If result matched $myusername and $mypassword, table row must be 1 row
          if($count==1){ 
@@ -300,7 +303,7 @@
             //echo "<br/>";
             //echo "password: $password";
             echo "<br/>";
-            echo "<a href=\"applicant_login.php\">Go Back</a><br />";
+            echo "<a href=\"applicant_login.html\">Go Back</a><br />";
          }
 
       break;

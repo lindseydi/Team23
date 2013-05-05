@@ -17,6 +17,9 @@
 <?php
   $studnum = $_SESSION['student_NO'];//$_GET['student_NO'];
   //mysql_query("RAWR") or die('Welcome page: '.$studnum);
+  //$_SESSION['student_NO'] = $studnum;
+
+  echo $studnum ."<br/>";
 
   $query = "SELECT app_status FROM applicant WHERE studentNO=$studnum;";
   //echo $query;

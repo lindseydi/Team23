@@ -8,6 +8,7 @@
 <body>
 
 <?php
+  //$studentNO = $_SESSION['student_NO'];//$_GET['student_no'];
   $studentNO = $_GET['studentNO'];
 
   $first_name = $_POST['firstname'];
@@ -39,7 +40,7 @@
   mysql_close($dbc);
 
   echo '<br /><br />';
-  echo "<a href='welcome.php?student_NO=$studentNO'>Go back home</a><br />";
+  echo "<a href=\"index.php?view=welcome\">Go back home.</a><br />";
 ?>
 
 </body>

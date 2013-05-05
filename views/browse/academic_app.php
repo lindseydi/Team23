@@ -15,8 +15,7 @@
 <body>
   <h2>Academic Application</h2>
 
-  <p>Fill out the following form as completely as possible:</p>
-  <?php
+<?php
 
   $student_no = $_SESSION['student_NO'];//$_GET['student_no'];
 
@@ -26,32 +25,36 @@
   $query = "SELECT * FROM application WHERE studentNO='$student_no';";
   $data = mysql_query($query)
     or die('Error querying database.'  . mysql_error());
-  echo "<br/>";
-
-  $_SESSION['fname'] = $fname;
-  $_SESSION['lname'] = $lname;
 
   list($studentNO,$fname,$lname,$transcript_recv,$starting_sem,$prior_degree,$pr_school,$pr_GPA,$pr_year,$prior_degree2,$pr_school2,$pr_GPA2,$pr_year2,
   $GRE_analytical,$GRE_quant,$GRE_verbal,$GRE_subj1,$GRE_subj2,$prior_work1,$prior_work2,$interest,$rec_email,$rec_full_name,$date_submitted, $letter_recv) = mysql_fetch_row($data);
 
-  ?>
+  echo "<br/>";
+  echo "Welcome back <b>" .$fname." ".$lname.'</b><br/>';
+  echo "Please fill out the form as completely as possible. You may save as often as you like, but once you press submit, no more changes can be made.";
+  echo "<br/><br/><br/>";
+
+ ?>
   <form method="post" action="index.php?view=academic_app_success">
-    <label for="studentNO">Student Number:</label>
+   
     <?php
+    /*
+     html <label for="studentNO">Student Number:</label>
     echo "<input type=\"text\" id=\"studentNO\" name=\"studentNO\" value=\"$student_no\" required><br />";
     echo "<label for=\"firstname\">First name:</label>";
     echo "<input type=\"text\" id=\"firstname\" value=\"$fname\" name=\"firstname\"><br />";
     echo "<label for=\"lastname\">Last name:</label>";
     echo "<input type=\"text\" id=\"lastname\" name=\"lastname\" value=\"$lname\"><br />";
+    */
     ?>
    
-    <label for="program">Masters or PhD?:</label>
+    <label for="program">Which program are you applying for?</label>
     <select name="program" required>
     <option value="masters">Masters</option>
     <option value="phd">PhD</option>
     </select>
     <br />
-    <input type="submit" value="Submit" name="submit" />
+    <label for="starting_sem">Starting Semester: </label>
      <select name="starting_sem">
       <option value="Fall 2013">Fall 2013</option>
       <option value="Spring 2014">Spring 2014</option>

@@ -16,9 +16,13 @@
   <h2>Academic Application</h2>
 
 <?php
+
     $studentNO = $_SESSION['student_NO'];//$_POST['studentNO'];
     $firstname = $_SESSION['fname'];//$_POST['firstname'];
-    $lastname = $_SESION['lname'];//$_POST['lastname'];
+    $lastname = $_SESSION['lname'];//$_POST['lastname'];
+
+    echo $firstname. " " . $lastname;
+
     $starting_sem = $_POST['starting_sem'];
     $prior_degree = $_POST['prior_degree'];
     $pr_school = $_POST['pr_school'];
@@ -60,7 +64,7 @@
 
 //SUBMIT, NO CHANGES CAN BE MADE AFTER THIS!
 //Consider making an "are you sure" dialog box!
-  } else if (1/*$_POST['action'] == 'Submit'*/) {
+  } else if ($_POST['action'] == 'Submit') {
 
 //Here is where we should check that the boxes that need to be filled out are filled out!
 
@@ -91,19 +95,22 @@
         
         //Generate a login for a recommender!
         //Should email them the login, but apparently this doesn't work, so i won't try
+        /*
         $rec_password = get_rand_numbers(8);
         $query4 = "INSERT INTO recommender VALUES('$rec_email', '$rec_password');";
+        */
 
          $data2 = mysql_query($query2);
          $data3 = mysql_query($query3);
-         $data4 = mysql_query($query4);
+         //$data4 = mysql_query($query4);
 
     echo "Thank you for submitting your application, please check back soon for final decision.";
     echo "<br/>";
 
 
   echo "<br/>";
-  echo "<a href=\"recommends.php?student_no=$studentNO&fname=$fname&lname=&$lname&rec_email=$rec_email&rec_full_name=$rec_full_name \" target=\"_blank\">Click here if you are $rec_full_name</a>";
+  echo "In a perfect world this link would be sent via e-mail: <br/>";
+  echo "<a href=\"recommends.php?student_no=$studentNO&fname=$firstname&lname=&$lastname&rec_email=$rec_email&rec_full_name=$rec_full_name \" target=\"_blank\">Click here if you are $rec_full_name</a>";
   echo "<br/>";
   echo "<br/>";
 
@@ -112,7 +119,7 @@
   }
   echo "<br/>";
   echo "<br/>";
-  echo "<a href=\"welcome.php?student_NO=$studentNO\">Back to welcome screen.</a><br />";
+  echo "<a href=\"index.php?view=welcome\">Back to welcome screen.</a><br />";
 ?>
 
 </body>

@@ -1,7 +1,6 @@
 <?php
   $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
     or die('Error connecting to MySQL server.');
-
    mysql_select_db("mikey_w", $dbc);
 ?>
 
@@ -19,7 +18,8 @@
   <p>Please hit submit after updating any information that has changed.</p>
 
 <?php
-  $studnum = $_GET['student_no'];
+
+  $studnum = $_SESSION['student_NO'];//$_GET['student_no'];
 
   $query = "SELECT fname, lname, email, addr1, addr2, city, state, zip, phoneNO FROM applicant WHERE studentNO=$studnum;";
   //echo $query;
@@ -104,7 +104,8 @@
     </select>
     <br />
 
-    <?php
+<?php
+
     echo "<label for=\"zip\">Zip Code</label>";
     echo "<input type=\"text\" name=\"zip\" value='$zip' maxlength=\"5\" required><br /> ";
 
@@ -118,8 +119,8 @@
     <input type="submit" value="Submit" name="submit" />
   </form>
 <?php
-echo '<br /><br />';
- echo "<a href='welcome.php?student_NO=$studnum'>Go Back</a><br />";
-  ?>
+  echo '<br /><br />';
+  echo "<a href='index.php?view=welcome'>Go Back</a><br />";
+?>
 </body>
 </html>

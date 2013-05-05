@@ -86,8 +86,8 @@
     <label for="phone">Phone Number</label>
     <input type="text" name="phone"  maxlength="10" placeholder="Ex: 3259400021" required><br />
 
-    <label for="email">E-mail Address</label>  
-    <input type="text"> @ <input type="text"> . <input type="text" name="email"  maxlength="40" required><br />    
+    <label for="email">E-mail Address</label>
+    <input type="text" name="email" maxlength="40" required><br />
 
     <input type="submit" value="Submit" name="submit" />
   </form>
