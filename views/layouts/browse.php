@@ -3,7 +3,7 @@
 <head>
    <title>Banner</title>
    <style type="text/css">
-      table.center {
+      html #wrapper {
         width:960px;
         margin:0 auto; 
       }
@@ -11,10 +11,6 @@
 </head>
 
 <body>
-
-<p style = "text-align: right">
-  <a href="index.php?view=index">Home</a>
-</p>
 
 <?php if($_SESSION['student_auth'] == true){ ?>
 

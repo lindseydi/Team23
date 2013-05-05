@@ -18,7 +18,7 @@ if($_SESSION['gs_auth'] == false){
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-   <a href="GWportal.html">Portal</a><br /> 
+   <a href="title_page.html">Portal</a><br /> 
 
 <?php 
 
@@ -43,9 +43,7 @@ if($_SESSION['gs_auth'] == false){
  $arr_length = count($find_arr);
  
  // Connect to the database
- $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e") 
- 	or die(mysql_error()); 
- mysql_select_db("mikey_w", $dbc); 
+ $dbc = db_connect();
 
  $query = "SELECT fname, lname, studentNO
           FROM applicant
@@ -91,6 +89,6 @@ for($x=0;$x<$arr_length;$x++)
 
 </table>
 <br/>
-<a href="gs_login_success.php">Go back to search</a>
+<a href="index.php?view=gs_login_success">Go back to search</a>
 </body>
 </html>
