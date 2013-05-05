@@ -83,7 +83,7 @@ for($x=0;$x<$arr_length;$x++)
    { 
      echo "<br/>";
      echo $fname ." " . $lname. " ";
-     echo "<a href=\"GSview.php?student_no=$studentNO \"> $studentNO</a>";
+     echo "<a href=\"GSview.php?student_no=$studentNO&fname=$fname&lname=$lname \"> $studentNO</a>";
      echo "<br/>";
    } 
  ?> 

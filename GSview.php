@@ -1,3 +1,10 @@
+<?php  
+    $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
+        or die('Error connecting to MySQL server.');
+
+    mysql_select_db("mikey_w", $dbc);
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -7,23 +14,21 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-   <a href="gs_login_success.php">Back to Search.</a><br />
+   <a href="index.php?view=gs_login_success">Back to Search.</a><br />
 
 
 <?php
-    $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
-        or die('Error connecting to MySQL server.');
-
-    mysql_select_db("mikey_w", $dbc);
-
 	$student_no= $_GET['student_no']; //Get the student number to pull all their info
-	//input it into the session so that it can carry over to the next page
+	$fname = $_GET['fname'];
+	$lname= $_GET['lname'];
+
 
 	//create query to show application information
 	$query = "SELECT student_status, ranking_final, transcript_recv  FROM application, processes WHERE application.studentNO='$student_no' AND processes.studentNO='$student_no';";
 
 	echo "<br/>";
     echo "<br/>";
+    echo "<h2>APPLICANT : $fname $lname</h2>";
 	$data = mysql_query($query);
 	//echo mysql_fetch_row($data);
 
@@ -35,75 +40,50 @@
 	echo "<form method=\"post\" action=\"gs_update.php\">";
     echo "<label for=\"studentNO\">Input the student number</label>";
 	echo "<input type=\"text\" name=\"studentNO\"/ value=" . $student_no . "><br />";
-	echo "<br/>";
-	echo "Current records indicate that the transcript for this student ";
-	switch($transcript_recv) { //decide what to do 
-		case "":
-	        echo "have not been received.<br/>";
-	        echo "<label for=\"transcript_recv\">Now what is the state of that stuents transcript?</label>";
-			echo "	<select name=\"transcript_recv\" />";
-    	    echo "<option value=\"0\">Not received</option>";
-	        echo "<option value=\"1\">Received</option>";
-	    break;
-	    case "1":
-	        echo "have been received, please check their folder.<br/>"; 
-	        echo "<label for=\"transcript_recv\">Now what is the state of that stuents transcript?</label>";
-			echo "	<select name=\"transcript_recv\" />";
-	        echo "<option value=\"1\">Received</option>";
-	        echo "<option value=\"0\">Not received</option>";
-	    break;
-	    case "0":
-	        echo "have not been received.<br/>";
-	        echo "<label for=\"transcript_recv\">Now what is the state of that stuents transcript?</label>";
-			echo "	<select name=\"transcript_recv\" />";
-    	    echo "<option value=\"0\">Not received</option>";
-	        echo "<option value=\"1\">Received</option>";
-	    break;
-	}
+	echo "<br/>"; 
+	        echo "<label for=\"transcript_recv\">Transcript: </label>";
+			echo "<select name=\"transcript_recv\" />";
+			if($transcript_recv=='0'){
+	    	    echo "<option value=\"0\" selected>Not received</option>";
+		        echo "<option value=\"1\">Received</option>";
+	    	}else{
+		    	echo "<option value=\"0\">Not received</option>";
+		        echo "<option value=\"1\" selected>Received</option>";	
+	    	}
 	echo "	</select>";
 	echo "<br/>";
 	echo "<br/>";
-	echo "Records indicate that the final decision ";
+	echo "<label for=\"ranking_final\">Input the final decision:</label>";
 	switch($ranking_final) { //decide what to do 
-		case "":
-			echo "has not been made.<br/>";
-			echo "<label for=\"ranking_final\">Input the final decision:</label>";
+		case '':
 			echo "<select name=\"ranking_final\" />";
 			echo "  <option value=\"0\">Decision not made.</option>";
 		    echo "  <option value=\"4\">Admit with Aid</option>";
 		    echo "  <option value=\"3\">Admit WITHOUT Aid</option>";
 		    echo "  <option value=\"1\">Reject</option>";
 		break;
-		case "0":
-			echo "has not been made.<br/>";
-			echo "<label for=\"ranking_final\">Input the final decision:</label>";
+		case '0':
 			echo "<select name=\"ranking_final\" />";
+			echo "  <option value=\"0\">Decision not made.</option>";
 		    echo "  <option value=\"4\">Admit with Aid</option>";
 		    echo "  <option value=\"3\">Admit WITHOUT Aid</option>";
 		    echo "  <option value=\"1\">Reject</option>";
-		    echo "  <option value=\"0\">Decision not made.</option>";
 		break;
-	    case "4":
-	        echo "is Admit with Aid<br/>";
-			echo "<label for=\"ranking_final\">Input the final decision:</label>";
+	    case '4':
 			echo "<select name=\"ranking_final\" />";
 		    echo "  <option value=\"4\">Admit with Aid</option>";
 		    echo "  <option value=\"3\">Admit WITHOUT Aid</option>";
 		    echo "  <option value=\"1\">Reject</option>";
 		    echo "  <option value=\"0\">Decision not made.</option>";
 	    break;
-	    case "3":
-	        echo "is admitted.<br/>";
-			echo "<label for=\"ranking_final\">Input the final decision:</label>";
+	    case '3':
 			echo "<select name=\"ranking_final\" />";
 	    	echo "  <option value=\"3\">Admit WITHOUT Aid</option>";
 		    echo "  <option value=\"4\">Admit with Aid</option>";
 		    echo "  <option value=\"1\">Reject</option>";
 		    echo "  <option value=\"0\">Decision not made.</option>";
 	    break;
-	    case "1":
-	        echo "is rejected.<br/>";
-	        echo "<label for=\"ranking_final\">Input the final decision:</label>";
+	    case '1':
 			echo "<select name=\"ranking_final\" />";
 		    echo "  <option value=\"1\">Reject</option>";
 	    	echo "  <option value=\"3\">Admit WITHOUT Aid</option>";

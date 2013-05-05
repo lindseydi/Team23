@@ -18,7 +18,7 @@
 
 <?php
   echo "<form method=\"post\" action=\"rec_success.php?studentNO=$studentNO\">";
-  echo "  <label for=\"rec_email\">Your e-mail</label>";
+  echo "<label for=\"rec_email\">Your e-mail</label>";
   echo "<input type=\"text\" id=\"rec_email\" name=\"rec_email\" value='$rec_email' required><br />";
   echo "<label for=\"rec_full_name\">Full Name:</label>";
   echo "<input type=\"text\" id=\"rec_full_name\" maxlength=\"50\" value='$rec_full_name' name=\"rec_full_name\" required><br />";
