@@ -18,7 +18,7 @@
     or die('Error connecting to MySQL server.');
   mysql_select_db("mikey_W", $dbc);
 
-  $query = "SELECT studentNO FROM applicant WHERE app_status='5' AND EXISTS(SELECT * FROM review WHERE review.studentNO=applicant.studentNO);";
+  $query = "SELECT applicant.studentNO FROM applicant, application WHERE app_status='5' AND applicant.studentNO=application.studentNO AND EXISTS(SELECT * FROM review WHERE review.studentNO=applicant.studentNO) ORDER BY date_submitted ASC;";
 //echo $query;
 $data = mysql_query($query);
 //echo mysql_num_rows($data);
