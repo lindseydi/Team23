@@ -22,7 +22,8 @@
     $lastname = $_SESSION['lname'];//$_POST['lastname'];
 
     echo $firstname. " " . $lastname;
-
+  
+    $program = $_POST['program'];
     $starting_sem = $_POST['starting_sem'];
     $prior_degree = $_POST['prior_degree'];
     $pr_school = $_POST['pr_school'];
@@ -45,7 +46,7 @@
 
     if ($_POST['action'] == 'Save') {
 
-    $query ="UPDATE application SET studentNO='$studentNO', fname='$firstname', lname='$lastname',
+    $query ="UPDATE application SET studentNO='$studentNO', fname='$firstname', lname='$lastname', program='$program',
     starting_sem='$starting_sem', prior_degree='$prior_degree', pr_school='$pr_school', pr_GPA='$pr_GPA',
     pr_year='$pr_year', prior_degree2='$prior_degree2', pr_school2='$pr_school2', pr_GPA2='$pr_GPA2',
     pr_year2='$pr_year2', GRE_analytical='$GRE_analytical', GRE_quant='$GRE_quant', GRE_verbal='$GRE_verbal',
@@ -64,7 +65,7 @@
 
 //SUBMIT, NO CHANGES CAN BE MADE AFTER THIS!
 //Consider making an "are you sure" dialog box!
-  } else if ($_POST['action'] == 'Submit') {
+  } else if(1){
 
 //Here is where we should check that the boxes that need to be filled out are filled out!
 

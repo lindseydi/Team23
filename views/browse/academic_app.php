@@ -27,7 +27,7 @@
     or die('Error querying database.'  . mysql_error());
 
   list($studentNO,$fname,$lname,$transcript_recv,$starting_sem,$prior_degree,$pr_school,$pr_GPA,$pr_year,$prior_degree2,$pr_school2,$pr_GPA2,$pr_year2,
-  $GRE_analytical,$GRE_quant,$GRE_verbal,$GRE_subj1,$GRE_subj2,$prior_work1,$prior_work2,$interest,$rec_email,$rec_full_name,$date_submitted, $letter_recv) = mysql_fetch_row($data);
+  $GRE_analytical,$GRE_quant,$GRE_verbal,$GRE_subj1,$GRE_subj2,$prior_work1,$prior_work2,$interest,$rec_email,$rec_full_name,$date_submitted, $letter_recv, $program) = mysql_fetch_row($data);
 
   echo "<br/>";
   echo "Welcome back <b>" .$fname." ".$lname.'</b><br/>';
@@ -50,16 +50,22 @@
    
     <label for="program">Which program are you applying for?</label>
     <select name="program" required>
+    <?php    
+    echo "<option value=\"$program\">$program</option>";
+    ?>
     <option value="masters">Masters</option>
     <option value="phd">PhD</option>
     </select>
     <br />
     <label for="starting_sem">Starting Semester: </label>
      <select name="starting_sem">
-      <option value="Fall 2013">Fall 2013</option>
-      <option value="Spring 2014">Spring 2014</option>
-      <option value="Summer 2014">Summer 2014</option>
-      <option value="Fall 2014">Fall 2014</option>
+      <?php    
+    echo "<option value=\"$starting_sem\">$starting_sem</option>";
+      ?>
+      <option value="Fall 13">Fall 13</option>
+      <option value="Spring 14">Spring 14</option>
+      <option value="Summer 14">Summer 14</option>
+      <option value="Fall 14">Fall 14</option>
     </select>
 <?php
     echo "<br/>";
