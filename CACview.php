@@ -1,76 +1,129 @@
+<?php
+	include('login.php');
+	include "views/layouts/browse.php";
+/*
+	if($_SESSION['cac_auth'] == false){
+		header('Location: index.php?view=universal_login');
+	}*/
+	$student_no= $_GET['student_no']; //Get the student number to pull all their info
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Student Application</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Student Application Review</title>
+	<style type='text/css'>
+		div.text {
+			width:600px;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:left;
+		}
+		div.link {
+			width:600px;
+			margin-left:auto;
+			margin-right:auto;
+			text-align:right;
+		}
+		h1{
+			text-align:center;
+		}
+	</style>
 </head>
 <body>
-   <a href="cac_login_success.php">Back to list of applicants.</a><br />
+	<div class='link'>
+   		<a href="index.php?view=cac_login_success">Back to list of applicants.</a><br />
+   	</div>
+    <h1>
+    	<span style="font-family:georgia,serif;">
+            Student Applicant #<?php echo $student_no; ?>'s Information
+        </span>
+    </h1>
 
 
 <?php
-    $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
-        or die('Error connecting to MySQL server.');
-
-    mysql_select_db("mikey_w", $dbc);
+	$dbc = db_connect();
 
 	$student_no= $_GET['student_no']; //Get the student number to pull all their info
 
 	//create query to show application information
-	$query = "SELECT prior_degree, pr_school, pr_GPA, pr_year, prior_degree2, pr_school2, pr_GPA2, pr_year2, GRE_analytical, GRE_verbal, GRE_quant, GRE_subj1, GRE_subj2, prior_work1, prior_work2, starting_sem, interest, program  FROM application WHERE studentNO='$student_no';";
-	$data = mysql_query($query);
+	$query = "SELECT prior_degree, pr_school, pr_GPA, pr_year, prior_degree2, pr_school2, pr_GPA2, pr_year2, GRE_analytical, GRE_verbal, GRE_quant, GRE_subj1, GRE_subj2, prior_work1, prior_work2, starting_sem, interest, program
+			  FROM application 
+			  WHERE studentNO='$student_no';";
+	$data = mysql_query($query) or die(mysql_error());
 	//echo mysql_fetch_row($data);
 
 	//should only iterate once
-   list($prior_degree, $pr_school, $pr_GPA, $pr_year, $prior_degree2, $pr_school2, $pr_GPA2, $pr_year2, $GRE_analytical, $GRE_verbal, $GRE_quant, $GRE_subj1, $GRE_subj2, $prior_work1, $prior_work2, $starting_sem, $interest ) = mysql_fetch_row($data);
-
-	//display application info in an easy to read format
-	echo '<br /> This is the information for student #' . $student_no .' <br />';
-	echo 'They are applying for the  ' . $starting_sem . ' semester.';
-	echo ' <br />     and are interested in ' . $interest . '.<br /><br /><br />';
-        echo 'They are applying for the ' . $program . ' program <br /><br />';
-	echo 'Here are their GRE scores: <br />';
-	echo 'Analytical:   ' . $GRE_analytical . '<br />';
-	echo 'Verbal:   ' . $GRE_verbal . '<br />';
-	echo 'Quantical:   ' . $GRE_quant . '<br />';
-	echo 'Subject 1:   ' . $GRE_subj1 . '<br />';
-	echo 'Subject 2:   ' . $GRE_subj2. '<br /><br /><br />';
-
-	echo 'They have received the following degrees:<br /><br />' ;
-	echo 'Degree 1: ' . $prior_degree . '<br />';
-	echo 'From: ' . $pr_school . '<br />';
-	echo 'Graduated in ' . $pr_year . '<br />';
-	echo 'With a ' . $pr_GPA . ' GPA <br /><br />';
-	echo 'Degree 2: ' . $prior_degree2 . '<br />';
-	echo 'From: ' . $pr_school2 . '<br />';
-	echo 'Graduated in ' . $pr_year2 . '<br />';
-	echo 'With a  ' . $pr_GPA2 . ' GPA <br /><br />';
-
-	echo 'Following are descriptions about previous work experiences:<br /><br />' ;
-	echo '1. ' . $prior_work1 . '.<br /><br />';
-	echo '2. ' . $prior_work2 . '<br /><br />';
-	
-	//query the recommendation
-	$query2 = "SELECT recommends.rec_full_name, title, rec_letter, affiliation FROM recommends, application WHERE application.studentNO='$student_no' AND application.rec_email=recommends.rec_email;";
-	$data2 = mysql_query($query2);
-	//display the recommendation
-   list($rec_full_name, $title, $rec_letter, $affiliation) = mysql_fetch_row($data2);
-	echo 'Recommendation From: ' . $rec_full_name .' <br />';
-	echo 'Job Title: ' . $title . '<br/>';
-	echo 'Affiliation to candidate:' . $affiliation . '.<br /><br /><br />';
-	echo $rec_letter .'<br />';
-
-	echo '<br /><br />---------------------------------------------------------------------------------------<br /><br />';
+   	list($prior_degree, $pr_school, $pr_GPA, $pr_year, $prior_degree2, $pr_school2, $pr_GPA2, $pr_year2, $GRE_analytical, $GRE_verbal, $GRE_quant, $GRE_subj1, $GRE_subj2, $prior_work1, $prior_work2, $starting_sem, $interest ) = mysql_fetch_row($data);
+ ?>
+ 	<!--display application info in an easy to read format-->
+ 	<div class='text'>
+ 	<p>
+ 		Student is applying for the <?php echo $starting_sem; ?> semester and is interested in <?php echo $interest; ?>
+ 	</p>
+ 	<p>
+ 		Student is applying for the <?php echo $program; ?> program.
+ 	</p>
+ 	<p>
+ 		<b>Student's GRE scores:</b>
+ 		<ul>
+ 			<li>Analytical: <?php echo $GRE_analytical; ?></li>
+ 			<li>Vertbal: <?php echo $GRE_verbal; ?></li>
+ 			<li>Quantical: <?php echo $GRE_quant; ?></li>
+ 			<li>Subject 1: <?php echo $GRE_subj1; ?></li>
+ 			<li>Subject 2: <?php echo $GRE_subj2; ?></li>
+ 		</UL>
+ 	</p>
+ 	<p>
+ 		<b>Student has received the following degrees:</b>
+ 		<ul>
+ 			<li>Degree 1: <?php echo $prior_degree; ?></li>
+ 			<li>From: <?php echo $pr_school; ?></li>
+ 			<li>Graduated in: <?php echo $pr_year; ?></li>
+ 			<li>With a <?php echo $pr_GPA; ?></li>
+ 		</UL>
+ 		<ul>
+ 			<li>Degree 1: <?php echo $prior_degree2; ?></li>
+ 			<li>From: <?php echo $pr_school2; ?></li>
+ 			<li>Graduated in: <?php echo $pr_year2; ?></li>
+ 			<li>With a <?php echo $pr_GPA2; ?></li>
+ 		</UL>
+ 	</p>
+ 	<p>
+ 		<b>Previous work experience:</b>
+ 		<ol>
+ 			<li><?php echo $prior_work1;?></li>
+ 			<li><?php echo $prior_work2;?></li>
+ 		</ol>
+ 	</p>
+ 	<?php
+		//query the recommendation
+		$query2 = "SELECT recommends.rec_full_name, title, rec_letter, affiliation FROM recommends, application WHERE application.studentNO='$student_no' AND application.rec_email=recommends.rec_email;";
+		$data2 = mysql_query($query2);
+		//display the recommendation
+   		list($rec_full_name, $title, $rec_letter, $affiliation) = mysql_fetch_row($data2);
+ 	?>
+ 	<p>
+ 		Recommendation From: <?php echo $rec_full_name; ?><br />
+ 		Job Title: <?php echo $title;?><br />
+ 		Affiliation to candidate: <?php echo $affiliation;?><br />
+ 		<?php echo $rec_letter;?>
+ 	</p>
+ 	<hr />
+ <?php
 
 	//query the fc reviews
 	$query3 = "SELECT rank, advisor_rec, reason_reject, comments, letter_cred, letter_rank, lname, fname FROM review, fcommittee WHERE studentNO='$student_no';";
 	$data3 = mysql_query($query3);
 	//display
 	list($rank, $advisor_rec, $reason_reject, $comments, $letter_cred, $letter_rank, $lname, $fname ) = mysql_fetch_row($data3);
-
-	echo 'Faculty Committee Member Review:<br /><br />' ;
+?>
+	<p>
+		<b>Faculty Committee Member Review:</b>
+	</p>
+<?php
 	echo 'Rank: ' . $rank . '<br />';
 	echo 'Reason for Reject: ' . $reason_reject . '<br />';
 	echo 'Thought the Recommendation Letter was ' . $letter_cred . '<br />';
@@ -97,6 +150,7 @@
     echo "<input type=\"submit\" value=\"Submit\" name=\"submit\" />";
     echo "</form>";
     ?>
+</div>
 </body>
 </html>
 
