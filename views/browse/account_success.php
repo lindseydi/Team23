@@ -202,7 +202,7 @@ function lengthOf($string, $targetLen){
 function check_notexists($email){
     $q="SELECT * FROM applicant WHERE email='$email';";
     $result = mysql_query($q);
-    if(mysql_num_rows(result) > 0){
+    if(mysql_num_rows($result) > 0){
       return false;
     }else{
       return true;

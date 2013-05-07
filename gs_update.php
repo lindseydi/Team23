@@ -24,7 +24,7 @@ ini_set('display_errors', True);
   $studentNO = $_POST['studentNO'];
   $submit = $_POST['submit'];
 
-  if($submit=='applicant'){
+  if($submit=='Submit'){
     //more post variables that apply if the submit was from an applicant page.
     $transcript_recv = $_POST['transcript_recv'];
     $ranking_final= $_POST['ranking_final'];
@@ -79,9 +79,27 @@ ini_set('display_errors', True);
       or die('Error querying database.'  . mysql_error());
   }else if($submit=='Matriculate'){
     //Here is where the applicant gets added to the Student database:
-    echo "Matriculate button got you to the right place!";
-    echo "<br/>  Student no:" . $studentNO;
-    $query = "";
+    //echo "Matriculate button got you to the right place!";
+    $q = "SELECT fname, lname, addr1, addr2, city, state, zip, phoneNO FROM applicant WHERE studentNO='$studentNO';";
+    $d = mysql_query($q);
+    list($fname, $lname, $addr1, $addr2, $city, $state, $zip, $phoneNO) = mysql_fetch_row($d);
+    $sname = $fname . " " . $lname;
+    echo "For student " . $sname . "<br/>";
+    $sid = randomGWID();
+    $email = create_email($fname, $lname);
+    echo "Email :" . $email . "<br/>";
+    $password = get_rand_numbers(6);
+    echo "Where the password is : " . $password . "<br/>";
+    $q2 = "INSERT INTO students (sid, sname, email, address, address2, city, state, zipcode, phonenumber, password) VALUES ('$sid', '$sname', '$email', '$addr1', '$addr2', '$city', '$state', '$zip', '$phoneNO', '$password');";
+    $q3 = "UPDATE applicant SET sid='$sid', student_status='6' WHERE studentNO='$studentNO';";
+    $q4 = "UPDATE processes SET student_status='6' WHERE studentNO='$studentNO';";
+
+    $r2 = mysql_query($q2)
+      or die('Error querying database.'  . mysql_error());
+    $r3 = mysql_query($q3)
+      or die('Error querying database.'  . mysql_error());
+    $r4 = mysql_query($q4)
+    or die('Error querying database.'  . mysql_error());
   }
 ?>
 <br/>
@@ -90,4 +108,77 @@ ini_set('display_errors', True);
 </body>
 </html>
 
+<?php
+function randomGWID(){
+    $randNum = get_rand_numbers(5);
+    $randNum = '6' . $randNum;
+    echo "SID: " . $randNum . "<br/>";
+    $sql = sprintf("SELECT * FROM applicant WHERE studentNO = %d", $randNum);
+    if(mysql_num_rows(mysql_query($sql)) > 0){
+      randomGWID();
+    }else{
+      return $randNum;
+    }
 
+}
+
+function assign_rand_value($num) {
+ switch($num) {
+  case "0" : $rand_value = "0"; break;
+  case "1" : $rand_value = "1"; break;
+  case "2" : $rand_value = "2"; break;
+  case "3" : $rand_value = "3"; break;
+  case "4" : $rand_value = "4"; break;
+  case "5" : $rand_value = "5"; break;
+  case "6" : $rand_value = "6"; break;
+  case "7" : $rand_value = "7"; break;
+  case "8" : $rand_value = "8"; break;
+  case "9" : $rand_value = "9"; break;
+  }
+ return $rand_value;
+}
+
+//simplify??
+function get_rand_numbers($length) {
+    if ($length>0) {
+        $rand_id="";
+        for($i=1; $i<=$length; $i++) {
+           // mt_srand((double)microtime() * 1000000);
+            $num = mt_rand(FALSE,9);
+            $rand_id .= assign_rand_value($num);
+        }
+    }
+    return $rand_id;
+}
+
+function create_email($fname, $lname){
+  $emailnet = strtolower($fname) . strtolower(substr($lname, 0, 2));
+  $email = $emailnet . "@gwu.edu";
+  if(check_notexists($email)){
+    return $email;
+  } else{
+    return add3digits($emailnet, $fname, $lname);
+  }
+}
+
+function add3digits($string, $fname, $lname){
+  $three = get_rand_numbers(3);
+  $email = $string . $three . "@gwu.edu";
+  if(check_notexists($email)){
+    return $email;
+  }else{
+    add3digits($string, $fname, $lname);
+  }
+}
+
+function check_notexists($email){
+    $q="SELECT * FROM students WHERE email='$email';";
+    $result = mysql_query($q);
+    if(mysql_num_rows($result) > 0){
+      return false;
+    }else{
+      return true;
+    }
+}
+
+?>

@@ -94,7 +94,7 @@
 	}
     echo "</select>";
     echo "<br />";
-    echo "<input type=\"submit\" value=\"applicant\" name=\"submit\" />";
+    echo "<input type=\"submit\" value=\"Submit\" name=\"submit\" />";
     echo "</form>";
 
     }else if($student_status == '4'){	
@@ -109,8 +109,22 @@
 		//This studen has accepted their offer and needs to get the info to their student account.
 		echo "This student has decided to accept GWs offer!<br/>";
 		echo "<input type=\"submit\" value=\"Matriculate\" name=\"submit\" />";
+	}else if($student_status == '6'){
+		echo "This applicant has been issued a gwu email and login.<br/>";
+
+		$q = "SELECT sid FROM applicant WHERE studentNO='$student_no';";
+		$r = mysql_query($q);
+		list($sid) = mysql_fetch_row($r);
+		$q2 = "SELECT sname, email, password FROM students WHERE sid='$sid';";
+		$r2 = mysql_query($q2);
+		list($sname, $email, $password) = mysql_fetch_row($r2);
+		echo "Their name: " . $sname . "<br />";
+		echo "Their SID: ". $sid . "<br />";
+		echo "Their email: " . $email . "<br />";
+		echo "Their password: " . $password ."<br />";
+		echo "<br />";
 	}else{
-		echo "should never get here(for now)";
+		echo "How did i get here?";
 	}
 ?>
 </body>

@@ -13,6 +13,7 @@ create table applicant (
   phoneNO			varchar(12) not null,
   app_status		varchar(20) not null,
   student_status    varchar(20) not null,
+  sid varchar(15),
   primary key (studentNO));
 
 
@@ -107,3 +108,7 @@ create table processes(
 ALTER TABLE applicant
 ADD FOREIGN KEY(student_status)
 REFERENCES processes(student_status);
+
+ALTER TABLE applicant
+ADD FOREIGN KEY(sid)
+REFERENCES students(sid);
