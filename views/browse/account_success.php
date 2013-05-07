@@ -73,7 +73,7 @@
             if($phone_noletters){
                if($email_valid){
                   if($account_notexists){
-  $query ="INSERT INTO applicant VALUES ('$student_NO', '$password', '$first_name', '$last_name', '$email', '$address_1', '$address_2', '$city', '$state', '$zip', '$phone', '$appstatus', '$student_status');";
+  $query ="INSERT INTO applicant (studentNO, password, fname, lname, email, addr1, addr2, city, state, zip, phoneNO, app_status, student_status) VALUES ('$student_NO', '$password', '$first_name', '$last_name', '$email', '$address_1', '$address_2', '$city', '$state', '$zip', '$phone', '$appstatus', '$student_status');";
 
   $query2 = "INSERT INTO processes (studentNO) VALUES ('$student_NO');";
 

@@ -21,7 +21,7 @@
     $firstname = $_SESSION['fname'];//$_POST['firstname'];
     $lastname = $_SESSION['lname'];//$_POST['lastname'];
 
-    echo $firstname. " " . $lastname;
+    //echo $firstname. " " . $lastname;
   
     $program = $_POST['program'];
     $starting_sem = $_POST['starting_sem'];
@@ -43,6 +43,7 @@
     $interest = $_POST['interest'];
     $rec_email = $_POST['rec_email'];
     $rec_full_name = $_POST['rec_full_name'];
+
 
     if ($_POST['action'] == 'Save') {
 
@@ -69,6 +70,16 @@
 
 //Here is where we should check that the boxes that need to be filled out are filled out!
 
+
+    $success = checkGPA($pr_GPA);
+
+    if ($success) { $success = checkYear($pr_year);}
+    if ($success) { $success = checkGPA($pr_GPA2);}
+    if ($success) { $success = checkYear($pr_year2);}
+    if ($success) { $success = checkEmail($rec_email);}
+
+
+      if($success){
         $query = "SELECT transcript_recv FROM application WHERE studentNO='$studentNO';";
 
         $data = mysql_query($query);
@@ -114,7 +125,7 @@
   echo "<a href=\"recommends.php?student_no=$studentNO&fname=$firstname&lname=&$lastname&rec_email=$rec_email&rec_full_name=$rec_full_name \" target=\"_blank\">Click here if you are $rec_full_name</a>";
   echo "<br/>";
   echo "<br/>";
-
+}
   }else{
     echo "Should never get here, error!";
   }
@@ -153,5 +164,85 @@ function get_rand_numbers($length) {
         }
     }
     return $rand_id;
+}
+
+function startNum($string){
+   if ((strlen($string) > 0) && (ctype_digit(substr($string, 0, 1)))){
+      return true;
+    }else{
+      echo "Your address cannot be correct without a house number!";
+      goBack();
+    }
+}
+
+function noLetters($string){
+    if (preg_match('/^[0-9]+$/', $string)) {
+      return true;
+    }else{
+          echo "Your input includes letters where it shouldn't";
+          goBack();
+    }
+}
+
+function lengthOf($string, $targetLen){
+  if(strlen($string)==$targetLen){
+    return true;
+  }else{
+      echo "Your input was not the correct length!";
+      goBack();
+  }
+}
+function check_notexists($email){
+    $q="SELECT * FROM applicant WHERE email='$email';";
+    $result = mysql_query($q);
+    if(mysql_num_rows($result) > 0){
+      "This email already exists in the system.";
+      goBack();
+    }else{
+      return true;
+    }
+}
+
+function checkEmail($email) {
+//regex from devshed
+  if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+).([a-zA-Z]+)+$/", $email)){
+    return TRUE;
+  } else{
+    //return FALSE;
+    echo "Be sure your e-mail is the correct format.";
+    goBack();
+  }
+}
+
+function checkGPA($GPA) {
+//regex from devshed
+  if(preg_match("/^|[0-3]\.(\d?\d?)|[4].[0]$/", $GPA)){
+    return TRUE;
+  } else{
+    //return FALSE;
+    echo "Be sure your GPA is the right format. If your GPA ends with a 0, put it. EX. 3.40";
+    goBack();
+  }
+}
+
+function checkYear($year) {
+//regex from devshed
+  echo $year . "<br/>";
+  if(!preg_match("/^(19|20)\d{2}$/", $GPA)){
+    return TRUE;
+  } else{
+    //return FALSE;
+    echo "Be sure your years are valid. Only years between 1900 and 2099 will be accepted";
+    goBack();
+  }
+}
+
+function goBack(){
+  echo "<br/><br/>";
+  echo "<FORM>";
+  echo "<INPUT class=\"center\" Type=\"button\" VALUE=\"Go back\" onClick=\"history.go(-1);return true;\">";
+  echo "</FORM>";
+  echo "<br/><br/>";
+  return false;
 }
 ?>

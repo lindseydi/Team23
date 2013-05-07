@@ -19,46 +19,39 @@ if($_SESSION['fcomm_auth'] == false){
 <body>
   <h2>Welcome <?php echo $_SESSION['user']; ?>!</h2>
 
-  <p>Here is the list of applicants that need review: </p>
+  <p>How would you like to sort applicants? </p>
 
 <?php
 
  //connect to mysql and select the database to use
   $dbc = db_connect();
 
-  //$email= $_GET['email'];
 //for when more than one review is needed!
 //$query = "SELECT DISTINCT applicant.studentNO FROM applicant, application WHERE app_status='5' AND NOT EXISTS (SELECT * FROM review WHERE email='$email' AND review.studentNO=applicant.studentNO);";
 
- //connect to mysql and select the database to use
-
-/* NOT SURE WHAT THIS IS DOING
-$query = "SELECT studentNO FROM processes WHERE student_status='1';";
-$data = mysql_query($query);
-
-while(list($studentNO) = mysql_fetch_row($data))
-{
-  echo "<br />";
-  echo "<a href=\"fcommittee_view.php?student_no=$studentNO \">Applicant $studentNO</a>";
-  echo "<br />";
- }
-*/
 
 $fcid = $_SESSION['username'];
 
+?>
 
-$query = "SELECT DISTINCT applicant.studentNO FROM applicant WHERE app_status='5' AND NOT EXISTS (SELECT * FROM review WHERE review.studentNO=applicant.studentNO);";
+<form method="post" action="index.php?view=fcommittee_sort">
+<label for="sort">Chooose your field</label>
+    <select name="sort" required>
+      <option value="GPA">GPA</option>
+      <option value="PhD">PhD</option>
+      <option value="Masters">Masters</option>
+      <option value="GRE_verbal">GRE_verbal</option>
+      <option value="GRE_quant">GRE_quant</option>
+    </select>
+ <br /> <br />
 
-//echo $query;
-$data = mysql_query($query);
-//$user = $_SESSION['user'];
+ <input type="submit" value="Submit" name=\"submit\"/>
 
-while(list($studentNO) = mysql_fetch_row($data))
-{
-  echo "<br />";
-  echo "<a href=\"fcommittee_view.php?student_no=$studentNO&fcid=$fcid \">Applicant $studentNO</a>";
-  echo "<br />";
- }
+<br /> <br />
+
+ *Remember student names will not be revealed!
+
+
 
  ?>
 

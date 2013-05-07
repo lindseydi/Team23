@@ -17,7 +17,6 @@
 
 <?php
   $studentNO = $_GET['studentNO'];
-  echo $studentNO .'<br/>';
   $rec_email= $_POST['rec_email'];
   $rec_full_name = $_POST['rec_full_name'];
   $title = $_POST['title'];
@@ -25,6 +24,7 @@
   $rec_letter = $_POST['rec_letter'];
 
   $query = "INSERT INTO recommends (rec_email,rec_full_name,title,affiliation, rec_letter) VALUES ('$rec_email', '$rec_full_name', '$title', '$affiliation', '$rec_letter');";
+ // echo $query . "<br/>";
   $query2 = "SELECT transcript_recv FROM application WHERE studentNO='$studentNO';";
   list($transcript_recv) = mysql_fetch_row(mysql_query($query2));
 

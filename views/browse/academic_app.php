@@ -2,6 +2,9 @@
   $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e") 
     or die(mysql_error()); 
   mysql_select_db("mikey_w", $dbc); 
+
+  error_reporting(E_ALL);
+  ini_set('display_errors', True);  
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -53,8 +56,8 @@
     <?php    
     echo "<option value=\"$program\">$program</option>";
     ?>
-    <option value="masters">Masters</option>
-    <option value="phd">PhD</option>
+    <option value="Masters">Masters</option>
+    <option value="PhD">PhD</option>
     </select>
     <br />
     <label for="starting_sem">Starting Semester: </label>
@@ -85,16 +88,75 @@
     echo "<input type=\"text\" id=\"pr_GPA2\" name=\"pr_GPA2\"  maxlength=\"4\" value=\"$pr_GPA2\"/><br />";
     echo "<label for=\"pr_year2\">Year graduated with second degree:</label>";
     echo "<input type=\"text\" id=\"pr_year2\" name=\"pr_year2\"  maxlength=\"4\" value=\"$pr_year2\"/><br />";
-    echo "<label for=\"GRE_analytical\">GRE Analytical score:</label>";
-    echo "<input type=\"text\" id=\"GRE_analytical\" name=\"GRE_analytical\"  maxlength=\"3\" value=\"$GRE_analytical\"/><br />";
-    echo "<label for=\"GRE_quant\">GRE Quant score:</label>";
-    echo "<input type=\"text\" id=\"GRE_quant\" name=\"GRE_quant\"  maxlength=\"3\" value=\"$GRE_quant\"/><br />";
-    echo "<label for=\"GRE_verbal\">GRE Verbal score:</label>";
-    echo "<input type=\"text\" id=\"GRE_verbal\" name=\"GRE_verbal\" maxlength=\"3\" value=\"$GRE_verbal\"/><br />";
+
+    //GRE SCORES
+
+    //Analytical
+    echo "<label for=\"GRE_analytical\">GRE Analytical Writing score:</label>";
+    echo "<select name=\"GRE_analytical\">";
+    echo "<option value=\"$GRE_analytical\" selected>$GRE_analytical</option>";
+    for($i=0; $i<7; $i+=.5){
+      echo "<option value=\"$i\" >$i</option>";
+    }
+    echo  "</select><br/>";
+
+
+    echo "<label for=\"GRE_quant\">GRE Quantitative Reasoning Score:</label>";
+    echo "<select name=\"GRE_quant\">";
+    echo "<option value=\"$GRE_quant\" selected>$GRE_quant</option>";
+    for($i=130; $i<171; $i++){
+      echo "<option value=\"$i\">$i</option>";
+    }
+    echo  "</select> <br/>";
+    
+
+    echo "<label for=\"GRE_verbal\">GRE Verbal Reasoning Score:</label>";
+    echo "<select name=\"GRE_verbal\">";
+    echo "<option value=\"$GRE_verbal\" selected>$GRE_verbal</option>";
+    for($i=130; $i<171; $i++){
+      echo "<option value=\"$i\">$i</option>";
+    }
+    echo  "</select> <br/>";
+    
+
+    echo "<FONT COLOR=\"B22222\">** Be sure to reselect the subject after each time you have saved</FONT><br/>";
     echo "<label for=\"GRE_subj1\">GRE Subject 1 score:</label>";
-    echo "<input type=\"text\" id=\"GRE_subj1\" name=\"GRE_subj1\" maxlength=\"3\" value=\"$GRE_subj1\"/><br />";
+    echo "<select name=\"subj1\">";
+      echo "<option value=\"Biochemistry\" >Biochemistry, Cell and Molecular Biology</option>";
+      echo "<option value=\"Biology\">Biology</option>";
+      echo "<option value=\"Chemistry\" >Chemistry</option>";
+      echo "<option value=\"ComputerScience\">Computer  Science</option>";
+      echo "<option value=\"LiteratureinEnglish\">Literature in English</option>";
+      echo "<option value=\"Mathematics\" >Mathematics</option>";
+      echo "<option value=\"Physics\">Physics</option>";
+      echo "<option value=\"Psychology\" >Psychology</option>";
+    echo  "</select>  ";
+    echo "<select name=\"GRE_subj1\">";
+    echo "<option value=\"$GRE_subj1\" selected>$GRE_subj1</option>";
+    for($i=200; $i<1000; $i+=10){
+      echo "<option value=\"$i\" >$i</option>";
+    }
+    echo  "</select> <br/>";
+
+
     echo "<label for=\"GRE_subj2\">GRE Subject 2 score:</label>";
-    echo "<input type=\"text\" id=\"GRE_subj2\" name=\"GRE_subj2\" maxlength=\"3\" value=\"$GRE_subj2\"/><br />";
+    echo "<select name=\"subj2\">";
+      echo "<option value=\"Biochemistry\" >Biochemistry, Cell and Molecular Biology</option>";
+      echo "<option value=\"Biology\">Biology</option>";
+      echo "<option value=\"Chemistry\" >Chemistry</option>";
+      echo "<option value=\"ComputerScience\">Computer  Science</option>";
+      echo "<option value=\"LiteratureinEnglish\">Literature in English</option>";
+      echo "<option value=\"Mathematics\" >Mathematics</option>";
+      echo "<option value=\"Physics\">Physics</option>";
+      echo "<option value=\"Psychology\" >Psychology</option>";
+    echo  "</select>  ";
+    echo "<select name=\"GRE_subj2\">";
+    echo "<option value=\"$GRE_subj2\" selected>$GRE_subj2</option>";
+    for($i=200; $i<1000; $i+=10){
+      echo "<option value=\"$i\" >$i</option>";
+    }
+    echo  "</select> <br/>";
+
     echo "<label for=\"prior_work1\">Prior work experience:</label>";
     echo "<input type=\"text\" id=\"prior_work1\" name=\"prior_work1\" maxlength=\"200\" value=\"$prior_work1\"/><br />";
     echo "<label for=\"prior_work2\">Prior work experience Job 2:</label>";
