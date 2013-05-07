@@ -21,6 +21,19 @@ function get_active_semester(){
    	return $active_term;
 }
 
-//function faculty_search($search_term)
+function faculty_search($search_term, $course_term, $faculty){	
+	db_connect();
+	//mysql_query("") or die($search_term.' '.$course_term.' '.$faculty);
+	$search_term = mysql_real_escape_string($search_term);
+	$search_query = "SELECT transcripts.sid, faculty.fid, faculty.cid, courses.ctitle, faculty.fname, transcripts.grades, students.sname
+	          		 FROM courses, faculty, transcripts, students 
+	          		 WHERE (faculty.fid = '$faculty' AND faculty.cid = transcripts.cid 
+	          		 AND courses.cid = faculty.cid AND transcripts.sid = students.sid 
+	          		 AND transcripts.term='$course_term') AND (students.sname='$search_term' OR courses.ctitle='$search_term');";
+	//mysql_query("") or die ($search_query);
+	$search_result = mysql_query($search_query) or die(mysql_error());
+	return $search_result;
+
+}
 
 ?>
