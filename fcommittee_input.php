@@ -12,7 +12,7 @@ Your decision has been recorded.
   $letter_cred = $_POST['letter_cred'];
   $letter_rank = $_POST['letter_rank'];
   $studentNO = $_POST['studentNO'];
-  $email = $_POST['email'];
+  $fcid = $_POST['fcid'];
   $advisor_rec = $_POST['advisor_rec'];
   $rank = $_POST['rank'];
   $reason_reject = $_POST['reason_reject'];
@@ -24,8 +24,8 @@ Your decision has been recorded.
    
    mysql_select_db("mikey_w", $dbc);
 
-   $query = "INSERT INTO review (letter_cred, letter_rank, studentNO, email, advisor_rec, rank, reason_reject, comments) VALUES('$letter_cred', '$letter_rank', 
-    '$studentNO', '$email', '$advisor_rec', '$rank', '$reason_reject', '$comments');";
+   $query = "INSERT INTO review (letter_cred, letter_rank, studentNO, fcid, advisor_rec, rank, reason_reject, comments) VALUES('$letter_cred', '$letter_rank', 
+    '$studentNO', '$fcid', '$advisor_rec', '$rank', '$reason_reject', '$comments');";
 
   $result = mysql_query($query)
      or die('Error querying database.'  . mysql_error());

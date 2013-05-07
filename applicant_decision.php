@@ -29,22 +29,20 @@
   $result2 = mysql_query($query2)
     or die('Error querying database.'  . mysql_error());
 
+
   if($decision=='4'){
-    echo "Thank you for considering GW for you graduate studies. We wish you luck in your pursuits. Your account will be deleted. ";
+    echo "Thank you for considering GW for you graduate studies. We wish you luck in your pursuits. ";
     //delete info from system?
     //$query3= "DELETE FROM applicant, processes, appication, review WHERE studentNO='$studentNO';";
 
-    $result3= mysql_query($result3)
-      or die ('Error querying database.' . mysql_error()));
-
   }else if($decision=='5'){
-    echo "Thank you! Your information has been updated in our records. Please check back in a few days to get your student information!";
+    echo "Thank you! Your information has been updated in our records. Please check back in a few days to receive your student information!";
   }
 
   mysql_close($dbc);
 
   echo '<br /><br />';
-  echo "<a href='welcome.php?student_NO=$studentNO'>Go back home</a><br />";
+  echo "<a href='index.php?view=welcome'>Go back home</a><br />";
 ?>
 
 </body>

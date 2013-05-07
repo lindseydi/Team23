@@ -35,12 +35,13 @@
 	//should only iterate once
    list($student_status, $ranking_final, $transcript_recv) = mysql_fetch_row($data);
 
-
-//Create a form so that the GS has control over certain things.
+   //Create a form so that the GS has control over certain things.
 	echo "<form method=\"post\" action=\"gs_update.php\">";
     echo "<label for=\"studentNO\">Input the student number</label>";
 	echo "<input type=\"text\" name=\"studentNO\"/ value=" . $student_no . "><br />";
 	echo "<br/>"; 
+
+   if($student_status < 4){
 	        echo "<label for=\"transcript_recv\">Transcript: </label>";
 			echo "<select name=\"transcript_recv\" />";
 			if($transcript_recv=='0'){
@@ -93,11 +94,36 @@
 	}
     echo "</select>";
     echo "<br />";
-    echo "<input type=\"submit\" value=\"Submit\" name=\"submit\" />";
+    echo "<input type=\"submit\" value=\"applicant\" name=\"submit\" />";
     echo "</form>";
-    ?>
 
+    }else if($student_status == '4'){	
+    	//This student has defered their acceptance!
+    	echo "This student has chosen to defer their acceptance. Would you like to Matriculate anyways?<br/>";    	
+    	echo "<input type=\"submit\" value=\"Matriculate\" name=\"submit\" /><br/>";
+    	echo "No?<br/>";
+    	goBack();
+
+	}
+	else if($student_status == '5'){
+		//This studen has accepted their offer and needs to get the info to their student account.
+		echo "This student has decided to accept GWs offer!<br/>";
+		echo "<input type=\"submit\" value=\"Matriculate\" name=\"submit\" />";
+	}else{
+		echo "should never get here(for now)";
+	}
+?>
 </body>
 </html>
+
+<?php
+function goBack(){
+  echo "<br/><br/>";
+  echo "<FORM>";
+  echo "<INPUT class=\"center\" Type=\"button\" VALUE=\"Go back\" onClick=\"history.go(-1);return true;\">";
+  echo "</FORM>";
+  echo "<br/><br/>";
+}
+?>
 
 

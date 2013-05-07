@@ -44,6 +44,7 @@
     if(noLetters($phone)){$phone_noletters=TRUE;}
 
   $email = $_POST['email'];
+    $account_notexists=check_notexists($email);
     $email_valid=FALSE;
     if(checkEmail($email)) {$email_valid=TRUE;}
   $student_NO = randomGWID();
@@ -71,6 +72,7 @@
           if($ten_numbers){
             if($phone_noletters){
                if($email_valid){
+                  if($account_notexists){
   $query ="INSERT INTO applicant VALUES ('$student_NO', '$password', '$first_name', '$last_name', '$email', '$address_1', '$address_2', '$city', '$state', '$zip', '$phone', '$appstatus', '$student_status');";
 
   $query2 = "INSERT INTO processes (studentNO) VALUES ('$student_NO');";
@@ -96,6 +98,10 @@
   echo 'Your password: ' . $password;
   echo '<br />';
   echo "<a href=\"applicant_login.html\">Login to fill out Application</a><br />";
+                }else{
+                   echo "This email address already has an account registered. Please login. ";
+                   goBack(); 
+                }
               }else{
                  echo "Your email address is invalid, please be sure it is of this format applicant@domain.ext ";
                  goBack();                
@@ -192,6 +198,15 @@ function lengthOf($string, $targetLen){
     //echo "oops! not long enough of a string!";
     return False;
   }
+}
+function check_notexists($email){
+    $q="SELECT * FROM applicant WHERE email='$email';";
+    $result = mysql_query($q);
+    if(mysql_num_rows(result) > 0){
+      return false;
+    }else{
+      return true;
+    }
 }
 
 function checkEmail($email) {

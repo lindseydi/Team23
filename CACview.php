@@ -85,7 +85,7 @@
  			<li>With a <?php echo $pr_GPA; ?></li>
  		</UL>
  		<ul>
- 			<li>Degree 1: <?php echo $prior_degree2; ?></li>
+ 			<li>Degree 2: <?php echo $prior_degree2; ?></li>
  			<li>From: <?php echo $pr_school2; ?></li>
  			<li>Graduated in: <?php echo $pr_year2; ?></li>
  			<li>With a <?php echo $pr_GPA2; ?></li>
@@ -115,32 +115,49 @@
  <?php
 
 	//query the fc reviews
-	$query3 = "SELECT rank, advisor_rec, reason_reject, comments, letter_cred, letter_rank, lname, fname FROM review, fcommittee WHERE studentNO='$student_no';";
+	$query3 = "SELECT rank, advisor_rec, reason_reject, comments, letter_cred, letter_rank, name FROM review, fcommittee WHERE studentNO='$student_no' AND review.fcid=fcommittee.fcid;";
 	$data3 = mysql_query($query3);
 	//display
-	list($rank, $advisor_rec, $reason_reject, $comments, $letter_cred, $letter_rank, $lname, $fname ) = mysql_fetch_row($data3);
+	list($rank, $advisor_rec, $reason_reject, $comments, $letter_cred, $letter_rank, $name) = mysql_fetch_row($data3);
+	//echo $query3 . "<br/>";
 ?>
 	<p>
 		<b>Faculty Committee Member Review:</b>
 	</p>
 <?php
-	echo 'Rank: ' . $rank . '<br />';
-	echo 'Reason for Reject: ' . $reason_reject . '<br />';
-	echo 'Thought the Recommendation Letter was ' . $letter_cred . '<br />';
-	echo 'and ranked the letter ' . $letter_rank . '<br />';
-	echo 'Recommended ' . $advisor_rec . ' as their advisor.<br />';
-	echo 'Additional Comments they left:' . $comments . '<br />';
+	echo 'Overall Rank: <b>';
+	switch ($rank){
+		case '1':
+			echo 'Reject </b><br/>';
+			echo 'Reason for Reject: ' . $reason_reject . '<br />';
+		break;
+		case '2':
+			echo "Borderline</b><br/>";
+			echo 'Reason for Reject: ' . $reason_reject . '<br />';
+		break;
+		case '3':
+			echo "Admit without Aid</b><br/>";
+		break;
+		case '4':
+			echo "Admit with Aid</b><br/>";
+		break;
+	}
+	echo 'Thought the Recommendation Letter was:  <b>' . $letter_cred . '</b><br />';
+	echo 'and ranked the letter as<b> ' . $letter_rank . '</b>  on a scale from 1-5.<br />';
+	echo 'Recommended <b>' . $advisor_rec . '</b> as their advisor.<br />';
+	echo 'Additional Comments they left:<br/><br/>    ' .  "     " . $comments . '<br />';
 
+	echo "<hr />";
 	//assume transcripts are in a file folder in desk
 	//create form for final decisiion
-	echo '<br /><br /><br />' ;
+	echo '<br />' ;
 
 	echo "<form method=\"post\" action=\"CAC_input.php\">";
 
-	echo "<label for=\"studentNO\">Input the student number</label>";
+	echo "<label for=\"studentNO\"><b>Input the student number</b></label>";
 	echo "<input type=\"text\" name=\"studentNO\" value=\"$student_no\"/><br />";
     
-	echo "<label for=\"ranking_final\">Input the final decision:</label>";
+	echo "<label for=\"ranking_final\"><b>Input the final decision:</b></label>";
 	echo "<select name=\"ranking_final\" />";
     echo "<option value=\"4\">Admit with Aid</option>";
     echo "<option value=\"3\">Admit WITHOUT Aid</option>";

@@ -49,36 +49,40 @@
    	break;
    	case '6':
    		echo "       Your application is complete and the decision has been made.";
-   		echo "<br/>";
-   		echo "<b>The decision: </b>";
-   		echo "<br/>";
+   		echo "<br/><br/>";
       //echo $student_status;
    		switch($student_status){
 		   	case '1':
+          echo "<b>The decision: </b>";
+          echo "<br/>";
 		   		echo "      We regret to inform you that you have not been accepted to the GW graduate program.";
 		   	break;
 		   	case '2':
+          echo "<b>The decision: </b>";
+          echo "<br/>";
 		   		echo "       Congratulations! You have been admitted!";
-          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO='$student_no'\">";
-          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Accept Offer<br>";
-          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Defer Offer<br>";
+          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO=$student_no\">";
+          echo "<input type=\"radio\" name=\"decision\" value=\"5\">Accept Offer<br>";
+          echo "<input type=\"radio\" name=\"decision\" value=\"4\">Defer Offer<br>";
           echo "<input type=\"submit\" value=\"Submit decision\">";
           echo "</form>";
 		   	break;
 		   	case '3':
+          echo "<b>The decision: </b>";
+          echo "<br/>";
 		   		echo "Congratulations! You have been admitted with Aid!";
-          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO='$student_no'\">";
-          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Accept Offer<br>";
-          echo "<input type=\"radio\" name=\"sex\" value=\"5\">Defer Offer<br>";
+          echo "<form method=\"post\" action=\"applicant_decision.php?studentNO=$student_no\">";
+          echo "<input type=\"radio\" name=\"decision\" value=\"5\">Accept Offer<br>";
+          echo "<input type=\"radio\" name=\"decision\" value=\"4\">Defer Offer<br>";
           echo "<input type=\"submit\" value=\"Submit decision\">";
           echo "</form>";
         break;
 		   	case '4':
-		   		echo "       You have already chosen to defer your offer to GW's graduate program.";
-          echo " Good luck in your graduate studies.";
+		   		echo "You have already chosen to defer your offer to GW's graduate program.";
+          echo "Good luck in your graduate studies.";
 		   	break;
         case '5':
-          echo "       You have already chosen to accept your offer to GW's graduate program!";
+           echo "You have already chosen to accept your offer to GW's graduate program!";
            echo " We cannot wait to have you as a student. Please allow a few days for your student account to be created and then check back to this page. Thank you for your patience!";
         break;
         case '6':

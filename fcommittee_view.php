@@ -15,7 +15,7 @@
     mysql_select_db("mikey_w", $dbc);
 
 	$student_no= $_GET['student_no']; //Get the student number to pull all their info
-	$email= $_GET['email'];
+	$fcid= $_GET['fcid'];
 
 	//create query to show application information
 	$query = "SELECT prior_degree, pr_school, pr_GPA, pr_year, prior_degree2, pr_school2, pr_GPA2, pr_year2, GRE_analytical, GRE_verbal, GRE_quant, GRE_subj1, GRE_subj2, prior_work1, prior_work2, starting_sem, interest, program  FROM application WHERE studentNO='$student_no';";
@@ -85,9 +85,9 @@
 
     echo "<label for=\"studentNO\">Input the student number</label>";
 	echo "<input type=\"text\" name=\"studentNO\" value=\"$student_no\"/><br />";
-//email
-	echo "<label for=\"email\">Your e-mail</label>";
-	echo "<input type=\"text\" id=\"email\" name=\"email\" value='$email' required><br />";
+//fcid
+	echo "<label for=\"fcid\">Your fcid </label>";
+	echo "<input type=\"text\" id=\"fcid\" name=\"fcid\" value='$fcid' required><br />";
 
 //advisor rec
     echo "<label for=\"advisor_rec\">Advisor Recommendation</label>";

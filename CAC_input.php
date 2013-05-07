@@ -45,7 +45,7 @@ Your decision has been recorded.
    $result2 = mysql_query($query2)
     or die('Error querying database.'  . mysql_error());
 
-  echo "<a href=\"cac_login_success.php\">Back Home</a>";
+  echo "<a href=\"index.php?view=cac_login_success\">Back Home</a>";
 ?>
 
 </body>

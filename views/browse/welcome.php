@@ -12,23 +12,24 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <h2>Welcome! What would you like to do?</h2>
 
 <?php
   $studnum = $_SESSION['student_NO'];//$_GET['student_NO'];
   //mysql_query("RAWR") or die('Welcome page: '.$studnum);
   //$_SESSION['student_NO'] = $studnum;
 
-  echo $studnum ."<br/>";
+  //echo $studnum ."<br/>";
 
-  $query = "SELECT app_status FROM applicant WHERE studentNO=$studnum;";
+  $query = "SELECT app_status, fname, lname FROM applicant WHERE studentNO=$studnum;";
   //echo $query;
 
   $result = mysql_query($query)
    or die('Error querying database.'  . mysql_error());
 
-  list($app_status) = mysql_fetch_row($result);
+  list($app_status, $fname, $lname) = mysql_fetch_row($result);
   //Link to continue application ONLY GET access if they have not hit submit!
+
+   echo "<h2>Welcome $fname $lname! What would you like to do?</h2>";
 
   //echo $app_status;
 
