@@ -60,8 +60,14 @@
          if(isset($_SESSION['register'])){
             unset($_SESSION['register']);
          }
-         $_SESSION['register'] = $_POST['course'];         
+         $_SESSION['register'] = $_POST['course'];   
+         //mysql_query("RAWR") or die("HERE IS stupid $_POST[course] $_POST[check_term] ".$_POST['course']);      
          $_SESSION['reg_error'] = array('error' => false, 'code' => 0);
+
+         //mysql_query("RAWR") or die('Here is the term: '.$_POST['term']);
+         $term = $_POST['check_term'];
+         //$term = mysql_real_escape_string($term);
+         //mysql_query("RAWR") or die('Here is the term: '.$term);
          
          
          //add_course($_SESSION['register']);
@@ -80,14 +86,14 @@
          $cname = mysql_real_escape_string($row['ctitle']);
          
          //for checking if already registered for the course
-         $query2 = "SELECT transcripts.sid, transcripts.cid FROM transcripts WHERE transcripts.sid = '$student' AND transcripts.cid = '$cid'";
+         $query2 = "SELECT transcripts.sid, transcripts.cid FROM transcripts WHERE transcripts.sid = '$student' AND transcripts.cid = '$cid' and transcripts.term='$term'";
          $result2 = mysql_query($query2) or die(mysql_error());
          $num_results = mysql_num_rows($result2);
          
          //for checking for same time course
          $testquery = mysql_query("SELECT transcripts.sid, transcripts.ctime, transcripts.cday, courses.ctime, courses.cday
                                    FROM courses, transcripts 
-                                   WHERE transcripts.sid = '$student' AND courses.cid = '$cid' AND transcripts.cday = courses.cday AND transcripts.ctime = courses.ctime
+                                   WHERE transcripts.sid = '$student' AND courses.cid = '$cid' AND transcripts.cday = courses.cday AND transcripts.ctime = courses.ctime AND courses.term='$term' AND transcripts.term='$term'
                                   ") or die($student.' '.$cid.' '.$error.' '.mysql_error());
          $numrows = mysql_num_rows($testquery);        
 
@@ -96,7 +102,7 @@
          }
          
          //for checking for overlapping time course
-         $time_query = "SELECT cday, ctime FROM transcripts WHERE sid = '$student'";
+         $time_query = "SELECT cday, ctime FROM transcripts WHERE sid = '$student' AND term='$term'";
          $time_result = mysql_query($time_query) or die($time_query.' '.mysql_error());
          while($time_rows = mysql_fetch_assoc($time_result)){
             //mysql_query("RAWR") or die($row['cday'].' other day '.$time_rows['cday']); 
@@ -114,10 +120,10 @@
          }
          
          //for checking for prerequisites
-         $q1 = "SELECT mpr, spr FROM courses WHERE courses.cid = '$cid'";
+         $q1 = "SELECT mpr, spr FROM courses WHERE courses.cid = '$cid' AND term='$term'";
          $mprvalue = mysql_query($q1)
-  	         or die('Query Error '.mysql_error());
-  	
+            or die('Query Error '.mysql_error());
+   
          $req_vals = mysql_fetch_assoc($mprvalue);
          $check_mpr = $req_vals['mpr'];
          $check_spr = $req_vals['spr'];
@@ -131,7 +137,7 @@
             //check for mpr match in transcripts
             $check_mpr = $req_vals['mpr'];
             $mpr_query = "SELECT * FROM transcripts, courses
-                          WHERE courses.cid = transcripts.cid AND transcripts.sid = '$student' AND courses.cnum = '$check_mpr' ";
+                          WHERE courses.cid = transcripts.cid AND transcripts.sid = '$student' AND courses.cnum = '$check_mpr' AND courses.term = '$term' AND transcripts.term='$term'";
             $mpr_result = mysql_query($mpr_query) or die($mpr_query.' '.mysql_error());
             //no match in transcripts
             $mpr_test = mysql_num_rows($mpr_result);
@@ -145,7 +151,7 @@
                if($req_vals['spr'] != 'none') {
                   //check if spr match in transcripts
                   $spr_query = "SELECT * FROM transcripts, courses
-                                WHERE transcripts.cid = courses.cid AND transcripts.sid = '$student' AND courses.cnum = '$check_spr'";
+                                WHERE transcripts.cid = courses.cid AND transcripts.sid = '$student' AND courses.cnum = '$check_spr' AND courses.term='$term' AND transcripts.term='$term'";
                   $spr_result = mysql_query($spr_query) or die($mpr_query.' '.mysql_error());
                   //no match in transcripts
                   $spr_test = mysql_num_rows($spr_result);
@@ -173,7 +179,7 @@
             header('Location: index.php?view=register_course');
          } else {
    
-            $query5 = "INSERT INTO transcripts VALUES ('$student', '$cid', '$cname', '$credit', 'IP', '$cday', '$ctime')";
+            $query5 = "INSERT INTO transcripts VALUES ('$student', '$cid', '$cname', '$credit', 'IP', '$cday', '$ctime', '$term')";
             $result5 = mysql_query($query5) or die(mysql_error());
    
             mysql_close($dbc);
@@ -197,24 +203,6 @@
          mysql_query($query) or die(mysql_error());
          
          header('Location: index.php?view=transcript');
-      break;
-      
-      case "student_login":
-         if($_SESSION['student_auth'] == true) {
-            header('Location: index.php?view=student_page');
-         } 
-      break;
-      
-      case "faculty_login":
-         if($_SESSION['faculty_auth'] == true) {
-            header('Location: index.php?view=faculty_page');
-         } 
-      break;
-      
-      case "gs_login":
-         if($_SESSION['gs_auth'] == true) {
-            header('Locatoin: index.php?view=gs_page');
-         } 
       break;
    
       case "faculty_update":
@@ -257,10 +245,20 @@
          $_SESSION['student_auth'] = false;
          $_SESSION['faculty_auth'] = false;
          $_SESSION['faculty_auth'] = false;
+         $_SESSION['cac_auth'] = false;
+         $_SESSION['fcomm_auth'] = false;
+         $_SESSION['sadmin_auth'] = false;
          
          session_destroy();
          
          header('Location: index.php?view=index');
+      break;
+
+      case "applicant_logout":
+         $_SESSION['applicant_auth'] = false;
+
+         session_destroy();
+         header('Location: applicant_login.html');
       break;
 
       case "app_checklogin":
@@ -295,6 +293,13 @@
 
          // If result matched $myusername and $mypassword, table row must be 1 row
          if($count==1){ 
+            $_SESSION['student_auth'] = false;
+            $_SESSION['faculty_auth'] = false;
+            $_SESSION['faculty_auth'] = false;
+            $_SESSION['cac_auth'] = false;
+            $_SESSION['fcomm_auth'] = false;
+            $_SESSION['sadmin_auth'] = false;
+            $_SESSION['applicant_auth'] = true;
             header("location: index.php?view=welcome");
          }
          else {
