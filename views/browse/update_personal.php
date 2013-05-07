@@ -21,12 +21,12 @@
 
   $studnum = $_SESSION['student_NO'];//$_GET['student_no'];
 
-  $query = "SELECT fname, lname, email, addr1, addr2, city, state, zip, phoneNO FROM applicant WHERE studentNO=$studnum;";
+  $query = "SELECT fname, lname, email, addr1, addr2, city, state, zip, phoneNO, password FROM applicant WHERE studentNO=$studnum;";
   //echo $query;
   echo '<br /><br />';
   $result = mysql_query($query);
 
-  list($fname, $lname, $email, $addr1, $addr2, $city, $state, $zip, $phoneNO) = mysql_fetch_row($result);
+  list($fname, $lname, $email, $addr1, $addr2, $city, $state, $zip, $phoneNO, $password) = mysql_fetch_row($result);
 
 
     echo "<form method=\"post\" action='update_personal_success.php?studentNO=$studnum'>";
@@ -114,6 +114,9 @@
 
     echo "<label for=\"email\">E-mail Address</label>";
     echo "<input type=\"text\" name=\"email\"  maxlength=\"20\" value='$email' required><br /> ";
+
+    echo "<label for=\"password\">Password</label>";
+    echo "<input type=\"text\" name=\"password\"  maxlength=\"20\" value='$password' required><br /> ";
     ?>
 
     <input type="submit" value="Submit" name="submit" />

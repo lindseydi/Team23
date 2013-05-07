@@ -10,8 +10,11 @@
 <body>
    <a href="GWportal.html">Portal</a><br /> 
 
-<?php 
 
+    <div id='center'>
+
+
+      <?php 
  echo "<h2>Results of Search: </h2><p>"; 
 
 //Gather the data from the search and save it in $find
@@ -73,7 +76,7 @@ for($x=0;$x<$arr_length;$x++)
    { 
      echo "<br/>";
      echo $fname ." " . $lname. " ";
-     echo "<a href=\"GSview.php?student_no=$studentNO \"> $studentNO</a>";
+     echo "<a href=\"sadmin_view.php?student_no=$studentNO&fname=$fname&lname=$lname \"> $studentNO</a>";
      echo "<br/>";
    } 
  ?> 
@@ -82,5 +85,6 @@ for($x=0;$x<$arr_length;$x++)
 </table>
 <br/>
 <a href="gs_login_success.php">Go back to search</a>
+</div>
 </body>
 </html>

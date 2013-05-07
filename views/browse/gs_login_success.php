@@ -19,7 +19,7 @@ if($_SESSION['gs_auth'] == false){
 <body>
   <h2>Welcome Graduate Secretary!</h2>
 
-  <p>Which student are you looking for? 
+  <p>Which applicant are you looking for? 
 
   </br>
 

@@ -77,6 +77,21 @@
     if ($success) { $success = checkGPA($pr_GPA2);}
     if ($success) { $success = checkYear($pr_year2);}
     if ($success) { $success = checkEmail($rec_email);}
+    if ($success) { $success = notNull($program);}
+  if ($success) { $success = notNull($starting_sem);}
+  if ($success) { $success = notNull($prior_degree);} 
+  if ($success) { $success = notNull($pr_school);}
+  if ($success) { $success = notNull($pr_GPA);}
+  if ($success) { $success = notNull($pr_year);}
+  if ($success) { $success = notNull($GRE_analytical);} 
+  if ($success) { $success = notNull($GRE_quant);}
+  if ($success) { $success = notNull($GRE_verbal);}
+  if ($success) { $success = notNull($prior_work1);}
+  if ($success) { $success = notNull($interest);} 
+  if ($success) { $success = notNull($rec_email);}
+  if ($success) { $success = notNull($rec_full_name);}
+
+
 
 
       if($success){
@@ -112,8 +127,8 @@
         $query4 = "INSERT INTO recommender VALUES('$rec_email', '$rec_password');";
         */
 
-         $data2 = mysql_query($query2);
-         $data3 = mysql_query($query3);
+        // $data2 = mysql_query($query2);
+         //$data3 = mysql_query($query3);
          //$data4 = mysql_query($query4);
 
     echo "Thank you for submitting your application, please check back soon for final decision.";
@@ -216,7 +231,8 @@ function checkEmail($email) {
 
 function checkGPA($GPA) {
 //regex from devshed
-  if(preg_match("/^|[0-3]\.(\d?\d?)|[4].[0]$/", $GPA)){
+ //echo $GPA. "<br/>";
+  if(((float)$GPA <= 4.0) || ($GPA="")){
     return TRUE;
   } else{
     //return FALSE;
@@ -227,12 +243,24 @@ function checkGPA($GPA) {
 
 function checkYear($year) {
 //regex from devshed
-  echo $year . "<br/>";
-  if(!preg_match("/^(19|20)\d{2}$/", $GPA)){
+  //echo $year . "n2<br/>";
+  if(((int)$year>1900) && ((int)$year < 2099) || $year==""){
     return TRUE;
   } else{
     //return FALSE;
     echo "Be sure your years are valid. Only years between 1900 and 2099 will be accepted";
+    goBack();
+  }
+}
+
+function notNull($text) {
+//regex from devshed
+  //echo $year . "<br/>";
+  if($text != ""){
+    return TRUE;
+  } else{
+    //return FALSE;
+    echo "Be sure to fill out all required fields.";
     goBack();
   }
 }

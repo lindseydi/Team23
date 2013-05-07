@@ -1,0 +1,212 @@
+insert into courses values
+  (1, 'Software Paradigms', 6221, 3, 'none', 'none', 'CS', 'M', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (2, 'Computer Architecture', 6461, 3, 'none', 'none', 'CS', 'T', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (3, 'Algorithms', 6212, 3, 'none', 'none', 'CS', 'W', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (4, 'Data Compression', 6225, 3, 'none', 'none', 'CS', 'R', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (5, 'Networks 1', 6232, 3, 'none', 'none', 'CS', 'M', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (6, 'Networks 2', 6233, 3, 6232, 'none', 'CS', 'T', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (7, 'Database 1', 6241, 3, 'none', 'none', 'CS', 'W', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (8, 'Database 2', 6242, 3, 6241, 'none', 'CS', 'R', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (9, 'Compilers', 6246, 3, 6461, 6212, 'CS', 'T', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (10, 'Distributed Systems', 6251, 3, 6461, 'none', 'CS', 'M', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (11, 'Software Engineering', 6254, 3, 6221, 'none', 'CS', 'M', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (12, 'Multimedia', 6260, 3, 6221, 'none', 'CS', 'R', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (13, 'Graphics 1', 6262, 3, 'none', 'none', 'CS', 'W', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (14, 'Security 1', 6283, 3,  6212, 'none', 'CS', 'T', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (15, 'Cryptography', 6284, 3, 6212, 'none', 'CS', 'M', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (16, 'Network Security', 6286, 3, 6283, 6232, 'CS', 'W', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (17, 'Advanced Algorithms', 6325, 2, 6212, 'none', 'CS', 'R', '4-6:30 PM', 'Fall 13');
+insert into courses values
+  (18, 'Embedded Systems', 6339, 2, 6461, 6212, 'CS', 'T', '3-5:30 PM', 'Fall 13');
+insert into courses values
+  (19, 'Advanced Crypto', 6384, 3, 6284, 6283, 'CS', 'W','4-6:30 PM', 'Fall 13');
+insert into courses values
+  (20, 'Communication Systems', 6243, 3, 'none', 'none', 'EE', 'M', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (21, 'Information Theory', 6244, 2, 'none', 'none', 'EE', 'T', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (22, 'Logic', 6210, 2, 'none', 'none', 'Math', 'W', '6-8:30 PM', 'Fall 13');
+insert into courses values
+  (23, 'Software Paradigms', 6221, 3, 'none', 'none', 'CS', 'M', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (24, 'Computer Architecture', 6461, 3, 'none', 'none', 'CS', 'T', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (25, 'Algorithms', 6212, 3, 'none', 'none', 'CS', 'W', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (26, 'Data Compression', 6225, 3, 'none', 'none', 'CS', 'R', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (27, 'Networks 1', 6232, 3, 'none', 'none', 'CS', 'M', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (28, 'Networks 2', 6233, 3, 6232, 'none', 'CS', 'T', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (29, 'Database 1', 6241, 3, 'none', 'none', 'CS', 'W', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (30, 'Database 2', 6242, 3, 6241, 'none', 'CS', 'R', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (31, 'Compilers', 6246, 3, 6461, 6212, 'CS', 'T', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (32, 'Distributed Systems', 6251, 3, 6461, 'none', 'CS', 'M', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (33, 'Software Engineering', 6254, 3, 6221, 'none', 'CS', 'M', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (34, 'Multimedia', 6260, 3, 6221, 'none', 'CS', 'R', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (35, 'Graphics 1', 6262, 3, 'none', 'none', 'CS', 'W', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (36, 'Security 1', 6283, 3,  6212, 'none', 'CS', 'T', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (37, 'Cryptography', 6284, 3, 6212, 'none', 'CS', 'M', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (38, 'Network Security', 6286, 3, 6283, 6232, 'CS', 'W', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (39, 'Advanced Algorithms', 6325, 2, 6212, 'none', 'CS', 'R', '4-6:30 PM', 'Spring 14');
+insert into courses values
+  (40, 'Embedded Systems', 6339, 2, 6461, 6212, 'CS', 'T', '3-5:30 PM', 'Spring 14');
+insert into courses values
+  (41, 'Advanced Crypto', 6384, 3, 6284, 6283, 'CS', 'W','4-6:30 PM', 'Spring 14');
+insert into courses values
+  (42, 'Communication Systems', 6243, 3, 'none', 'none', 'EE', 'M', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (43, 'Information Theory', 6244, 2, 'none', 'none', 'EE', 'T', '6-8:30 PM', 'Spring 14');
+insert into courses values
+  (44, 'Logic', 6210, 2, 'none', 'none', 'Math', 'W', '6-8:30 PM', 'Spring 14');
+
+insert into students values
+  (600001, 'Jillian Tromach', 'jtr@gwu.edu', '1191 Park Street', 'none', 'Chicago', 'IL', '90112', '773-114-3098', 'true', 'jtr234');
+insert into students values
+  (600002, 'Melony Pavan', 'mpv@gwu.edu', 'Ester City Circle', 'none', 'Kansas City', 'KA', '11110', '804-443-8721', 'true', 'mpv234');
+
+insert into faculty values
+  (800001, 'Aria Velts', 1, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 2, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 3, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 4, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 5, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 6, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 7, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 8, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 9, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 10, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 11, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 12, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 13, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 14, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 15, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 16, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 17, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 18, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 19, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 20, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 21, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 22, 'sj2345');
+insert into faculty values
+  (800001, 'Aria Velts', 23, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 24, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 25, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 26, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 27, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 28, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 29, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 30, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 31, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 32, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 33, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 34, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 35, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 36, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 37, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 38, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 39, 'sj2345');
+insert into faculty values
+  (800003, 'Mark Abraham', 40, 'ma2345');
+insert into faculty values
+  (800004, 'Aaron Eltz', 41, 'ae2345');
+insert into faculty values
+  (800005, 'Narahari', 42, 'oo2345');
+insert into faculty values
+  (800001, 'Aria Velts', 43, 'av2345');
+insert into faculty values
+  (800002, 'Smith Johns', 44, 'sj2345');
+
+
+insert into gsecretary values
+  (900001, 'Maggie Masters', 'mm6234');
+insert into gsecretary values
+  (900002, 'Narahari', 'bn6234');
+
+insert into sadmin values
+  (100001, 'Narahari', 'Fall 13', 'bn1234');
+
+insert into transcripts values
+  (600001, 1, 'Software Paradigms', 3, 'IP', 'M', '3-5:30 PM');
+insert into transcripts values
+  (600002, 11, 'Software Engineering', 3, 'IP', 'M', '3-5:30 PM');
+insert into transcripts values
+  (600001, 2, 'Computer Architecture', 3, 'IP', 'T', '3-5:30 PM');
+insert into transcripts values
+  (600002, 5, 'Networks 1', 3, 'IP', 'M', '6-8:30 PM');
+insert into transcripts values
+  (600001, 6, 'Networks 2', 3, 'IP', 'T', '6-8:30 PM');
+insert into transcripts values
+  (600002, 3, 'Algorithms', 3, 'IP', 'W', '3-5:30 PM');
+insert into transcripts values
+  (600002, 9, 'Compilers', 3, 'IP', 'T', '3-5:30 PM');
+
+insert into CAC values ('Narahari', '500001', 'clark@gwu.edu', 'gocolonials');
+insert into CAC values ('Mitchell Dar', '500002', 'mdar@gwu.edu', 'mdar112');
+
+insert into fcommittee values ('Narahari', '800010', 'varitek@gwu.edu', 'baseball34');
+insert into fcommittee values ('Diane Smith', '800012', 'smith2100@gwu.edu', 'sciencerules');

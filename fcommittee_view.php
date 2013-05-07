@@ -23,7 +23,7 @@
 	//echo mysql_fetch_row($data);
 
 	//should only iterate once
-   list($prior_degree, $pr_school, $pr_GPA, $pr_year, $prior_degree2, $pr_school2, $pr_GPA2, $pr_year2, $GRE_analytical, $GRE_verbal, $GRE_quant, $GRE_subj1, $GRE_subj2, $prior_work1, $prior_work2, $starting_sem, $interest ) = mysql_fetch_row($data);
+   list($prior_degree, $pr_school, $pr_GPA, $pr_year, $prior_degree2, $pr_school2, $pr_GPA2, $pr_year2, $GRE_analytical, $GRE_verbal, $GRE_quant, $GRE_subj1, $GRE_subj2, $prior_work1, $prior_work2, $starting_sem, $interest, $program ) = mysql_fetch_row($data);
 
 	//display application info in an easy to read format
 	echo '<br /> This is the information for student #' . $student_no .' <br />';

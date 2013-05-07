@@ -40,9 +40,10 @@ ini_set('display_errors', True);
     if($allgood){$allgood = lengthOf($phone, 10);}
   $email = $_POST['email'];
     if($allgood){$allgood = checkEmail($email);}
+  $password = $_POST['password'];
 
 if($allgood){
-  $query ="UPDATE applicant SET fname='$first_name', lname='$last_name', email='$email', addr1='$address_1', addr2='$address_2', city='$city', state='$state', zip='$zip', phoneNO='$phone' WHERE studentNO='$studentNO';";
+  $query ="UPDATE applicant SET fname='$first_name', lname='$last_name', email='$email', addr1='$address_1', addr2='$address_2', city='$city', state='$state', zip='$zip', phoneNO='$phone', password='$password' WHERE studentNO='$studentNO';";
 
   $result = mysql_query($query)
     or die('Error querying database.'  . mysql_error());

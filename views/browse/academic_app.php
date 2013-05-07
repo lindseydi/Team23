@@ -34,10 +34,12 @@
 
   echo "<br/>";
   echo "Welcome back <b>" .$fname." ".$lname.'</b><br/>';
-  echo "Please fill out the form as completely as possible. You may save as often as you like, but once you press submit, no more changes can be made.";
-  echo "<br/><br/><br/>";
+  echo "Please fill out the form as completely as possible. You may save as often as you like, but once you press submit, no more changes can be made.<br/>";
+  ?>
+  <FONT COLOR="B22222">*</FONT> indicates a required field.
+  <br/><br/><br/>
 
- ?>
+
   <form method="post" action="index.php?view=academic_app_success">
    
     <?php
@@ -52,6 +54,7 @@
     ?>
    
     <label for="program">Which program are you applying for?</label>
+    <FONT COLOR="B22222">*</FONT>
     <select name="program" required>
     <?php    
     echo "<option value=\"$program\">$program</option>";
@@ -60,7 +63,7 @@
     <option value="PhD">PhD</option>
     </select>
     <br />
-    <label for="starting_sem">Starting Semester: </label>
+    <label for="starting_sem">Starting Semester: <FONT COLOR="B22222">*</FONT> </label>
      <select name="starting_sem">
       <?php    
     echo "<option value=\"$starting_sem\">$starting_sem</option>";
@@ -71,17 +74,45 @@
       <option value="Fall 14">Fall 14</option>
     </select>
 <?php
-    echo "<br/>";
+    echo "<br/><br/>";
+    //Previous Degrees:
     echo "<label for=\"prior_degree\">Any prior degrees?:</label>";
-    echo "<input type=\"text\" id=\"prior_degree\" name=\"prior_degree\" placeholder=\"EX: Bachelors\" maxlength=\"10\" value=\"$prior_degree\"/><br />";
-    echo "<label for=\"pr_school\">School where the degree was earned:</label>";
+    ?>
+    <FONT COLOR="B22222">*</FONT> 
+     <select name="prior_degree">
+     <?php
+     echo "<option value=\"$prior_degree\">$prior_degree</option>"
+     ?>
+     <option value="Associates">Associates</option>
+     <option value="BA">Bachelor of Arts</option>
+     <option value="BS">Bachelor of Science</option>
+    </select>
+    <br />
+
+  <?php
+    echo "<label for=\"pr_school\">School where the degree was earned:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"pr_school\" name=\"pr_school\" maxlength=\"40\" value=\"$pr_school\"/><br />";
-    echo "<label for=\"pr_GPA\">GPA Attained:</label>";
+    echo "<label for=\"pr_GPA\">GPA Attained:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"pr_GPA\" name=\"pr_GPA\" maxlength=\"4\" value=\"$pr_GPA\"/><br />";
-    echo "<label for=\"pr_year\">Year Graduated:</label>";
+    echo "<label for=\"pr_year\">Year Graduated:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"pr_year\" name=\"pr_year\" maxlength=\"4\" value=\"$pr_year\" /><br />";
-    echo "<label for=\"prior_degree2\">Second prior degree (if applicable):</label>";
-    echo "<input type=\"text\" id=\"prior_degree2\" name=\"prior_degree2\" placeholder=\"EX: Bachelors\" maxlength=\"10\" value=\"$prior_degree2\"/><br />";
+
+    //Prior Degree Two
+    echo "<br/><label for=\"prior_degree2\">Second prior degree (if applicable):</label>";
+     ?>
+     <select name="prior_degree2">
+     <?php
+     echo "<option value=\"$prior_degree2\">$prior_degree2</option>"
+     ?>
+     <option value="Associates">Associates</option>
+     <option value="BA">Bachelor of Arts</option>
+     <option value="BS">Bachelor of Science</option>
+    </select>
+    <br />
+
+
+
+  <?php
     echo "<label for=\"pr_school2\">School where second degree was earned</label>";
     echo "<input type=\"text\" id=\"pr_school2\" name=\"pr_school2\"  maxlength=\"40\" value=\"$pr_school2\"/><br />";
     echo "<label for=\"pr_GPA2\">GPA Attained with second degree:</label>";
@@ -92,7 +123,7 @@
     //GRE SCORES
 
     //Analytical
-    echo "<label for=\"GRE_analytical\">GRE Analytical Writing score:</label>";
+    echo "<br/><label for=\"GRE_analytical\">GRE Analytical Writing score:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<select name=\"GRE_analytical\">";
     echo "<option value=\"$GRE_analytical\" selected>$GRE_analytical</option>";
     for($i=0; $i<7; $i+=.5){
@@ -101,7 +132,7 @@
     echo  "</select><br/>";
 
 
-    echo "<label for=\"GRE_quant\">GRE Quantitative Reasoning Score:</label>";
+    echo "<label for=\"GRE_quant\">GRE Quantitative Reasoning Score:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<select name=\"GRE_quant\">";
     echo "<option value=\"$GRE_quant\" selected>$GRE_quant</option>";
     for($i=130; $i<171; $i++){
@@ -110,7 +141,7 @@
     echo  "</select> <br/>";
     
 
-    echo "<label for=\"GRE_verbal\">GRE Verbal Reasoning Score:</label>";
+    echo "<label for=\"GRE_verbal\">GRE Verbal Reasoning Score:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<select name=\"GRE_verbal\">";
     echo "<option value=\"$GRE_verbal\" selected>$GRE_verbal</option>";
     for($i=130; $i<171; $i++){
@@ -155,19 +186,20 @@
     for($i=200; $i<1000; $i+=10){
       echo "<option value=\"$i\" >$i</option>";
     }
-    echo  "</select> <br/>";
+    echo  "</select> <br/><br/>";
 
-    echo "<label for=\"prior_work1\">Prior work experience:</label>";
+    echo "<label for=\"prior_work1\">Prior work experience:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"prior_work1\" name=\"prior_work1\" maxlength=\"200\" value=\"$prior_work1\"/><br />";
     echo "<label for=\"prior_work2\">Prior work experience Job 2:</label>";
     echo "<input type=\"text\" id=\"prior_work2\" name=\"prior_work2\" maxlength=\"200\" value=\"$prior_work2\"/><br />";
-    echo "<label for=\"interest\">Area of interest:</label>";
+    
+    echo "<label for=\"interest\">Area of interest:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"interest\" name=\"interest\" maxlength=\"20\" value=\"$interest\"/><br />";
 
-    echo "<label for=\"rec_email\">Email for person writing recommendation:</label>";
+    echo "<label for=\"rec_email\">Email for person writing recommendation:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"rec_email\" name=\"rec_email\" maxlength=\"20\" value=\"$rec_email\"/><br />";
 
-    echo "<label for=\"rec_full_name\">Name of person writing recommendation:</label>";
+    echo "<label for=\"rec_full_name\">Name of person writing recommendation:<FONT COLOR=\"B22222\">*</FONT></label>";
     echo "<input type=\"text\" id=\"rec_full_name\" name=\"rec_full_name\" maxlength=\"20\" value=\"$rec_full_name\"/><br />";
 
     echo "<input type=\"submit\" value=\"Save\" name=\"action\" />";
