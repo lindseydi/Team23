@@ -4,15 +4,13 @@ if($_SESSION['student_auth'] == false){
    header('Location: index.php?view=universal_login');
 }
 
-if(!isset($_SESSION['term'])){
-   header('Location: index.php?view=student_page');
-}
-
 $_SESSION['register'] = false;
 
 if(!empty($_POST)){
-   $_SESSION['register'] = $_POST['register'];
+   if(isset($_POST['register']))
+      $_SESSION['register'] = $_POST['register'];
 }
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -46,6 +44,13 @@ if(!empty($_POST)){
          </form>
       </div></p>
 
+      <div id='center'>
+         <form action="index.php?view=student_update_personal" method='POST'>
+            <input type='hidden' name='edit' value='true'/>
+            <input type='submit' value='Edit Profile'>
+         </form>
+      </div>
+
 
 
       <?php } //close the if statement
@@ -59,8 +64,7 @@ if(!empty($_POST)){
                <input type="submit" value="Submit">
             </form>
          </div>
-      <?php } //end else if statement
-      ?>            
+      <?php } ?>        
 
    </body>
 </html>

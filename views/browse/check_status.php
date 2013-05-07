@@ -86,7 +86,20 @@
            echo " We cannot wait to have you as a student. Please allow a few days for your student account to be created and then check back to this page. Thank you for your patience!";
         break;
         case '6':
-          echo "       Your account has been created. Please login at this site:<br/>";
+          $q = "SELECT sid FROM applicant WHERE studentNO='$student_no';";
+          $r = mysql_query($q);
+          list($sid) = mysql_fetch_row($r);
+          $q2 = "SELECT sname, email, password FROM students WHERE sid='$sid';";
+          $r2 = mysql_query($q2);
+          list($sname, $email, $password) = mysql_fetch_row($r2);
+          echo  $sname . " your account has been created!<br />";
+          echo "Your SID: ". $sid . "<br />";
+          echo "Your new email: " . $email . "<br />";
+          echo "Your password: " . $password ."<br />";
+          echo "<br /><br />";
+
+         echo "<a href=\"index.php?view=universal_login\">Login to Student Account</a><br />";
+          
         break;
 		   }
    	break;

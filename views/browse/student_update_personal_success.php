@@ -1,6 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', True);  
+  error_reporting(E_ALL);
+  ini_set('display_errors', True);  
+
+  if($_SESSION['student_auth'] == false){
+     header('Location: index.php?view=universal_login');
+  }
 
   $dbc = mysql_connect("localhost", "mikey_w", "s3cr3t201e")
     or die('Error connecting to MySQL server.');
@@ -17,21 +21,19 @@ ini_set('display_errors', True);
 <body>
 
 <?php
-  //$studentNO = $_SESSION['student_NO'];//$_GET['student_no'];
+  
+ $sid = mysql_real_escape_string($_SESSION['username']);
 
-  $studentNO = $_GET['studentNO'];
-
-  $first_name = $_POST['firstname'];
-  $last_name = $_POST['lastname'];
-  $address_1 = $_POST['addr1'];
+  $sname = $_POST['sname'];
+  $address_1 = $_POST['address'];
     $allgood = startNum($address_1);
-  $address_2 = $_POST['addr2'];
+  $address_2 = $_POST['address2'];
   $city = $_POST['city'];
   $state = $_POST['state'];
-  $zip = $_POST['zip'];
+  $zip = $_POST['zipcode'];
     if($allgood){$allgood = noLetters($zip);}
     if($allgood){$allgood = lengthOf($zip, 5);}
-  $phone = $_POST['phone'];
+  $phone = $_POST['phonenumber'];
   $phone = str_replace("-", "", $phone);
   $phone = str_replace("(", "", $phone);
   $phone = str_replace(")", "", $phone);
@@ -40,9 +42,10 @@ ini_set('display_errors', True);
     if($allgood){$allgood = lengthOf($phone, 10);}
   $email = $_POST['email'];
     if($allgood){$allgood = checkEmail($email);}
+  $password = $_POST['password'];
 
 if($allgood){
-  $query ="UPDATE applicant SET fname='$first_name', lname='$last_name', email='$email', addr1='$address_1', addr2='$address_2', city='$city', state='$state', zip='$zip', phoneNO='$phone' WHERE studentNO='$studentNO';";
+  $query ="UPDATE students SET sname='$sname', email='$email', address='$address_1', address2='$address_2', city='$city', state='$state', zipcode='$zip', phonenumber='$phone', password='$password' WHERE sid='$sid';";
 
   $result = mysql_query($query)
     or die('Error querying database.'  . mysql_error());
@@ -53,7 +56,8 @@ if($allgood){
 
 
   echo '<br /><br />';
-  echo "<a href=\"index.php?view=welcome\">Go back home.</a><br />";
+  echo "<a href='index.php?view=student_page'>Go Back Home</a><br />";
+  
   }
 ?>
 
